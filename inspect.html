@@ -507,7 +507,7 @@
     <div class="header-top">
       <div class="title-group">
         <h1>⚔️ RUNE AGE 카드 정밀 가로/세로 절단선 및 침범 표시기</h1>
-        <div class="sub">마우스 클릭으로 가로/세로선 지정 — 좌측(침범면) 및 우측(원래 절단선) 양방향 지원</div>
+        <div class="sub">마우스 클릭으로 가로/세로 점선 지정 — 원본 넉넉한 여백(상하 +200px, 좌우 +140px) 탑재</div>
       </div>
       <div class="header-actions">
         <span class="stats-badge" id="stats-badge">선 표시된 카드: 0장 / 310장</span>
@@ -559,17 +559,34 @@
         </button>
       </div>
 
-      <span style="font-size:0.75rem; color:var(--text-muted); font-weight:700; margin-left:8px;">선 종류:</span>
+      <span style="font-size:0.75rem; color:var(--text-muted); font-weight:700; margin-left:6px;">종류:</span>
       <div class="tool-group">
         <button class="tool-btn cut active" id="btn-type-cut" onclick="setLineType('cut', '#ef4444')">
-          <span class="color-dot" style="background:#ef4444;"></span> 🔴 원래 절단선 (1)
+          <span class="color-dot" style="background:#ef4444;"></span> 🔴 절단선 (1)
         </button>
         <button class="tool-btn intrusion" id="btn-type-intrusion" onclick="setLineType('intrusion', '#3b82f6')">
-          <span class="color-dot" style="background:#3b82f6;"></span> 🔵 침범 경계선 (2)
+          <span class="color-dot" style="background:#3b82f6;"></span> 🔵 침범선 (2)
         </button>
         <button class="tool-btn missing" id="btn-type-missing" onclick="setLineType('missing', '#10b981')">
-          <span class="color-dot" style="background:#10b981;"></span> 🟢 누락 부분 (3)
+          <span class="color-dot" style="background:#10b981;"></span> 🟢 누락선 (3)
         </button>
+      </div>
+
+      <span style="font-size:0.75rem; color:var(--text-muted); font-weight:700; margin-left:6px;">스타일:</span>
+      <div class="tool-group">
+        <button class="tool-btn active" id="btn-style-dashed" onclick="setLineStyle('dashed')">
+          ╌ 점선
+        </button>
+        <button class="tool-btn" id="btn-style-solid" onclick="setLineStyle('solid')">
+          ── 실선
+        </button>
+      </div>
+
+      <span style="font-size:0.75rem; color:var(--text-muted); font-weight:700; margin-left:6px;">굵기:</span>
+      <div class="tool-group">
+        <button class="tool-btn active" id="btn-width-1" onclick="setGlobalLineWidth(1)">1px (초슬림)</button>
+        <button class="tool-btn" id="btn-width-2" onclick="setGlobalLineWidth(2)">2px</button>
+        <button class="tool-btn" id="btn-width-3" onclick="setGlobalLineWidth(3)">3px</button>
       </div>
 
       <div class="selected-controls" id="selected-controls">
@@ -608,13 +625,10 @@
       <!-- Right Column: Wider Context Image -->
       <div class="column-box">
         <div class="col-header">
-          <span>➡️ 스캔 원본 비교군 (Wider Context)</span>
+          <span>➡️ 스캔 원본 비교군 (넉넉한 확장 여백)</span>
           <div class="col-header-actions">
-            <span class="tag tag-right">원래 4면 절단선 표시</span>
-            <button class="btn-mini" style="padding:2px 8px; font-size:0.7rem; background:#1e3a8a; color:#bfdbfe; border:1px solid #2563eb; border-radius:3px; cursor:pointer;" onclick="add4EdgePreset()">📐 4면 절단선 자동배치</button>
-            <label style="font-size:0.7rem; color:var(--text-muted); cursor:pointer; display:inline-flex; align-items:center; gap:3px;">
-              <input type="checkbox" id="mask-outside-toggle" checked onchange="drawCanvas('right')"> 음영마스크
-            </label>
+            <span class="tag tag-right">원래 4면 절단 점선 표시</span>
+            <button class="btn-mini" style="padding:2px 8px; font-size:0.7rem; background:#1e3a8a; color:#bfdbfe; border:1px solid #2563eb; border-radius:3px; cursor:pointer;" onclick="add4EdgePreset()">📐 4면 절단 점선 자동배치</button>
             <button class="btn-mini" style="padding:2px 6px; font-size:0.7rem; background:#1f2937; color:#f87171; border:1px solid #374151; border-radius:3px; cursor:pointer;" onclick="clearLines('right')">비우기</button>
           </div>
         </div>
@@ -635,7 +649,7 @@
     <div class="modal-bottom">
       <div class="note-input-wrap">
         <span style="color:var(--text-muted); font-weight:700;">메모:</span>
-        <input type="text" class="note-input" id="card-note" placeholder="예: 왼쪽 하단 80px은 다른 카드임, 오른쪽 이미지 상단 70px / 하단 695px이 원래 선" oninput="saveCurrentData()">
+        <input type="text" class="note-input" id="card-note" placeholder="예: 왼쪽 하단 80px은 다른 카드임, 오른쪽 이미지 상단 200px / 하단 830px이 원래 선" oninput="saveCurrentData()">
       </div>
       <div>
         <span>단축키: <span class="kbd">H</span> 가로선 | <span class="kbd">V</span> 세로선 | <span class="kbd">1</span> 절단선 | <span class="kbd">2</span> 침범선 | <span class="kbd">3</span> 누락선 | <span class="kbd">◀ / ▶</span> 카드이동 | <span class="kbd">Del</span> 선삭제</span>
@@ -658,6 +672,8 @@
     let currentOrientation = 'horizontal'; // 'horizontal' | 'vertical'
     let currentLineType = 'cut'; // 'cut' | 'intrusion' | 'missing'
     let currentLineColor = '#ef4444';
+    let currentLineStyle = 'dashed'; // 'dashed' | 'solid'
+    let globalLineWidth = 1; // 1px default for ultra-slim precision
 
     // Currently selected line for fine nudge / deletion
     let selectedLineRef = null;
@@ -799,6 +815,23 @@
       document.getElementById('btn-type-missing').classList.toggle('active', type === 'missing');
     }
 
+    function setLineStyle(style) {
+      currentLineStyle = style;
+      document.getElementById('btn-style-dashed').classList.toggle('active', style === 'dashed');
+      document.getElementById('btn-style-solid').classList.toggle('active', style === 'solid');
+      drawCanvas('left');
+      drawCanvas('right');
+    }
+
+    function setGlobalLineWidth(width) {
+      globalLineWidth = width;
+      document.querySelectorAll('[id^=btn-width-]').forEach(b => b.classList.remove('active'));
+      const activeBtn = document.getElementById('btn-width-' + width);
+      if (activeBtn) activeBtn.classList.add('active');
+      drawCanvas('left');
+      drawCanvas('right');
+    }
+
     function initLeftCanvas() {
       const img = document.getElementById('crop-img');
       canvasL.width = img.naturalWidth || 500;
@@ -809,8 +842,8 @@
 
     function initRightCanvas() {
       const img = document.getElementById('context-img');
-      canvasR.width = img.naturalWidth || 500;
-      canvasR.height = img.naturalHeight || 700;
+      canvasR.width = img.naturalWidth || 680;
+      canvasR.height = img.naturalHeight || 1030;
       drawCanvas('right');
       renderChips('right');
     }
@@ -832,11 +865,11 @@
       const w = canvasR.width;
       const h = canvasR.height;
       
-      // Default margin is 70px top/bottom, 50px left/right
-      const topY = Math.min(70, Math.round(h * 0.1));
-      const bottomY = Math.max(h - 70, Math.round(h * 0.9));
-      const leftX = Math.min(50, Math.round(w * 0.1));
-      const rightX = Math.max(w - 50, Math.round(w * 0.9));
+      // With margin_y = 200, margin_x = 140
+      const topY = Math.min(200, Math.round(h * 0.18));
+      const bottomY = Math.max(h - 200, Math.round(h * 0.82));
+      const leftX = Math.min(140, Math.round(w * 0.18));
+      const rightX = Math.max(w - 140, Math.round(w * 0.82));
 
       // Remove existing cut lines on right
       currentRightLines = currentRightLines.filter(l => l.type !== 'cut');
@@ -863,7 +896,7 @@
       }
     }
 
-    // Draw lines, labels, hover guideline, and optional outside shade mask
+    // Draw lines, labels, hover guideline (NO semi-transparent mask)
     function drawCanvas(side) {
       const canvas = side === 'left' ? canvasL : canvasR;
       const ctx = side === 'left' ? ctxL : ctxR;
@@ -871,47 +904,20 @@
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // On Right Canvas: If outside shade mask enabled and 4 cut lines exist, shade outside
-      if (side === 'right' && document.getElementById('mask-outside-toggle').checked) {
-        const horizCuts = lines.filter(l => l.orientation === 'horizontal' && l.type === 'cut').map(l => l.coord).sort((a,b)=>a-b);
-        const vertCuts = lines.filter(l => l.orientation === 'vertical' && l.type === 'cut').map(l => l.coord).sort((a,b)=>a-b);
-
-        if (horizCuts.length >= 2 && vertCuts.length >= 2) {
-          const t = horizCuts[0];
-          const b = horizCuts[horizCuts.length - 1];
-          const l = vertCuts[0];
-          const r = vertCuts[vertCuts.length - 1];
-
-          ctx.save();
-          ctx.fillStyle = 'rgba(0, 0, 0, 0.55)';
-          // Top mask
-          ctx.fillRect(0, 0, canvas.width, t);
-          // Bottom mask
-          ctx.fillRect(0, b, canvas.width, canvas.height - b);
-          // Left mask
-          ctx.fillRect(0, t, l, b - t);
-          // Right mask
-          ctx.fillRect(r, t, canvas.width - r, b - t);
-
-          // Subtle box border
-          ctx.strokeStyle = '#ffffff';
-          ctx.lineWidth = 1;
-          ctx.setLineDash([4, 4]);
-          ctx.strokeRect(l, t, r - l, b - t);
-          ctx.restore();
-        }
-      }
-
-      // Draw all placed lines
+      // Draw all placed lines (Crisp Dashed or Solid lines, zero obstruction)
       lines.forEach((line, idx) => {
         const isSelected = selectedLineRef && selectedLineRef.side === side && selectedLineRef.index === idx;
 
         ctx.save();
-        ctx.lineWidth = isSelected ? 3 : 2;
+        ctx.lineWidth = isSelected ? (globalLineWidth + 1) : globalLineWidth;
         ctx.strokeStyle = line.color;
 
-        ctx.shadowColor = '#000000';
-        ctx.shadowBlur = 4;
+        // Dashed line style
+        if (currentLineStyle === 'dashed') {
+          ctx.setLineDash([5, 3]);
+        } else {
+          ctx.setLineDash([]);
+        }
 
         ctx.beginPath();
         if (line.orientation === 'horizontal') {
@@ -923,28 +929,28 @@
         }
         ctx.stroke();
 
-        // Label box
-        const typeLabel = line.type === 'cut' ? '절단선' : (line.type === 'intrusion' ? '침범선' : '누락선');
-        const text = `${typeLabel} ${line.orientation === 'horizontal' ? 'Y' : 'X'}: ${line.coord}px`;
+        // Subtle neat edge indicator tag
+        const typeLabel = line.type === 'cut' ? '절단' : (line.type === 'intrusion' ? '침범' : '누락');
+        const text = `${typeLabel} ${line.orientation === 'horizontal' ? 'Y' : 'X'}: ${line.coord}`;
         
-        ctx.font = 'bold 12px sans-serif';
+        ctx.setLineDash([]);
+        ctx.font = 'bold 11px sans-serif';
         const textWidth = ctx.measureText(text).width;
         
         let lx, ly;
         if (line.orientation === 'horizontal') {
-          lx = Math.min(canvas.width - textWidth - 16, 12 + (idx % 4) * 80);
-          ly = Math.max(16, Math.min(canvas.height - 8, line.coord - 6));
+          lx = 6;
+          ly = Math.max(14, Math.min(canvas.height - 6, line.coord - 4));
         } else {
-          lx = Math.max(4, Math.min(canvas.width - textWidth - 12, line.coord + 6));
-          ly = 24 + (idx % 8) * 26;
+          lx = Math.max(4, Math.min(canvas.width - textWidth - 10, line.coord + 4));
+          ly = 16 + (idx % 6) * 22;
         }
 
         ctx.fillStyle = isSelected ? '#ffffff' : line.color;
-        ctx.fillRect(lx - 4, ly - 12, textWidth + 8, 16);
+        ctx.fillRect(lx - 2, ly - 10, textWidth + 6, 14);
 
         ctx.fillStyle = isSelected ? '#000000' : (line.type === 'missing' ? '#000000' : '#ffffff');
-        ctx.shadowBlur = 0;
-        ctx.fillText(text, lx, ly);
+        ctx.fillText(text, lx + 1, ly);
 
         ctx.restore();
       });
