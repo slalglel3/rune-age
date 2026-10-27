@@ -1,0 +1,1670 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>룬 에이지 스캔 카드 인스펙터 (총 319장)</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #0f172a; color: #f1f5f9; font-family: -apple-system, sans-serif; padding: 16px; }
+    h1 { font-size: 20px; color: #f8fafc; margin-bottom: 6px; }
+    p.desc { font-size: 13px; color: #94a3b8; margin-bottom: 16px; }
+    
+    .nav-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+    .tab-btn {
+      background: #1e293b; color: #94a3b8; border: 1px solid #334155;
+      padding: 8px 14px; border-radius: 6px; font-size: 13px; font-weight: 600; cursor: pointer;
+    }
+    .tab-btn.active { background: #0284c7; color: #fff; border-color: #0284c7; }
+    
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 12px; }
+    .card-item {
+      background: #1e293b; border: 1px solid #334155; border-radius: 6px; padding: 6px;
+      display: flex; flex-direction: column; align-items: center; cursor: pointer;
+    }
+    .card-item img { width: 100%; aspect-ratio: 5 / 7; object-fit: cover; border-radius: 4px; background: #000; }
+    .card-label { font-size: 11px; color: #38bdf8; margin-top: 6px; font-weight: bold; text-align: center; }
+    
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+    
+    .modal {
+      display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.9); align-items: center; justify-content: center; z-index: 1000;
+    }
+    .modal.active { display: flex; }
+    .modal img { max-width: 92vw; max-height: 88vh; border-radius: 8px; border: 2px solid #38bdf8; }
+  </style>
+</head>
+<body>
+  <h1>🎴 룬 에이지 분리 카드 인스펙터</h1>
+  <p class="desc">스캔본에서 분리된 199장 앞면과 120장 뒷면입니다. 카드를 탭하면 고해상도로 크게 확대됩니다.</p>
+  
+  <div class="nav-tabs">
+    <button class="tab-btn active" onclick="showTab('f1', this)">앞면 1번 시트 (66장)</button>
+    <button class="tab-btn" onclick="showTab('f2', this)">앞면 2번 시트 (70장)</button>
+    <button class="tab-btn" onclick="showTab('f3', this)">앞면 3번 시트 (63장)</button>
+    <button class="tab-btn" onclick="showTab('b1', this)">뒷면 1번 시트 (60장)</button>
+    <button class="tab-btn" onclick="showTab('b2', this)">뒷면 2번 시트 (60장)</button>
+  </div>
+  
+  <div id="tab-f1" class="tab-content active"><div class="grid">
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_1/front_1_r0_c0.webp" alt="front_1_r0_c0.webp" loading="lazy">
+          <div class="card-label">FRONT_1 (r0, c0)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_1/front_1_r0_c1.webp" alt="front_1_r0_c1.webp" loading="lazy">
+          <div class="card-label">FRONT_1 (r0, c1)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_1/front_1_r0_c2.webp" alt="front_1_r0_c2.webp" loading="lazy">
+          <div class="card-label">FRONT_1 (r0, c2)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_1/front_1_r0_c3.webp" alt="front_1_r0_c3.webp" loading="lazy">
+          <div class="card-label">FRONT_1 (r0, c3)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_1/front_1_r0_c4.webp" alt="front_1_r0_c4.webp" loading="lazy">
+          <div class="card-label">FRONT_1 (r0, c4)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_1/front_1_r0_c5.webp" alt="front_1_r0_c5.webp" loading="lazy">
+          <div class="card-label">FRONT_1 (r0, c5)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_1/front_1_r0_c6.webp" alt="front_1_r0_c6.webp" loading="lazy">
+          <div class="card-label">FRONT_1 (r0, c6)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_1/front_1_r0_c7.webp" alt="front_1_r0_c7.webp" loading="lazy">
+          <div class="card-label">FRONT_1 (r0, c7)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_1/front_1_r0_c8.webp" alt="front_1_r0_c8.webp" loading="lazy">
+          <div class="card-label">FRONT_1 (r0, c8)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_1/front_1_r0_c9.webp" alt="front_1_r0_c9.webp" loading="lazy">
+          <div class="card-label">FRONT_1 (r0, c9)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_1/front_1_r1_c0.webp" alt="front_1_r1_c0.webp" loading="lazy">
+          <div class="card-label">FRONT_1 (r1, c0)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_1/front_1_r1_c1.webp" alt="front_1_r1_c1.webp" loading="lazy">
+          <div class="card-label">FRONT_1 (r1, c1)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_1/front_1_r1_c2.webp" alt="front_1_r1_c2.webp" loading="lazy">
+          <div class="card-label">FRONT_1 (r1, c2)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_1/front_1_r1_c3.webp" alt="front_1_r1_c3.webp" loading="lazy">
+          <div class="card-label">FRONT_1 (r1, c3)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_1/front_1_r1_c4.webp" alt="front_1_r1_c4.webp" loading="lazy">
+          <div class="card-label">FRONT_1 (r1, c4)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_1/front_1_r1_c5.webp" alt="front_1_r1_c5.webp" loading="lazy">
+          <div class="card-label">FRONT_1 (r1, c5)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_1/front_1_r1_c6.webp" alt="front_1_r1_c6.webp" loading="lazy">
+          <div class="card-label">FRONT_1 (r1, c6)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_1/front_1_r1_c7.webp" alt="front_1_r1_c7.webp" loading="lazy">
+          <div class="card-label">FRONT_1 (r1, c7)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_1/front_1_r1_c8.webp" alt="front_1_r1_c8.webp" loading="lazy">
+          <div class="card-label">FRONT_1 (r1, c8)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_1/front_1_r1_c9.webp" alt="front_1_r1_c9.webp" loading="lazy">
+          <div class="card-label">FRONT_1 (r1, c9)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_1/front_1_r2_c0.webp" alt="front_1_r2_c0.webp" loading="lazy">
+          <div class="card-label">FRONT_1 (r2, c0)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_1/front_1_r2_c1.webp" alt="front_1_r2_c1.webp" loading="lazy">
+          <div class="card-label">FRONT_1 (r2, c1)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_1/front_1_r2_c2.webp" alt="front_1_r2_c2.webp" loading="lazy">
+          <div class="card-label">FRONT_1 (r2, c2)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_1/front_1_r2_c3.webp" alt="front_1_r2_c3.webp" loading="lazy">
+          <div class="card-label">FRONT_1 (r2, c3)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_1/front_1_r2_c4.webp" alt="front_1_r2_c4.webp" loading="lazy">
+          <div class="card-label">FRONT_1 (r2, c4)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_1/front_1_r2_c5.webp" alt="front_1_r2_c5.webp" loading="lazy">
+          <div class="card-label">FRONT_1 (r2, c5)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_1/front_1_r2_c6.webp" alt="front_1_r2_c6.webp" loading="lazy">
+          <div class="card-label">FRONT_1 (r2, c6)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_1/front_1_r2_c7.webp" alt="front_1_r2_c7.webp" loading="lazy">
+          <div class="card-label">FRONT_1 (r2, c7)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_1/front_1_r2_c8.webp" alt="front_1_r2_c8.webp" loading="lazy">
+          <div class="card-label">FRONT_1 (r2, c8)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_1/front_1_r2_c9.webp" alt="front_1_r2_c9.webp" loading="lazy">
+          <div class="card-label">FRONT_1 (r2, c9)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_1/front_1_r3_c0.webp" alt="front_1_r3_c0.webp" loading="lazy">
+          <div class="card-label">FRONT_1 (r3, c0)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_1/front_1_r3_c1.webp" alt="front_1_r3_c1.webp" loading="lazy">
+          <div class="card-label">FRONT_1 (r3, c1)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_1/front_1_r3_c2.webp" alt="front_1_r3_c2.webp" loading="lazy">
+          <div class="card-label">FRONT_1 (r3, c2)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_1/front_1_r3_c3.webp" alt="front_1_r3_c3.webp" loading="lazy">
+          <div class="card-label">FRONT_1 (r3, c3)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_1/front_1_r3_c4.webp" alt="front_1_r3_c4.webp" loading="lazy">
+          <div class="card-label">FRONT_1 (r3, c4)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_1/front_1_r3_c5.webp" alt="front_1_r3_c5.webp" loading="lazy">
+          <div class="card-label">FRONT_1 (r3, c5)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_1/front_1_r3_c6.webp" alt="front_1_r3_c6.webp" loading="lazy">
+          <div class="card-label">FRONT_1 (r3, c6)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_1/front_1_r3_c7.webp" alt="front_1_r3_c7.webp" loading="lazy">
+          <div class="card-label">FRONT_1 (r3, c7)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_1/front_1_r3_c8.webp" alt="front_1_r3_c8.webp" loading="lazy">
+          <div class="card-label">FRONT_1 (r3, c8)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_1/front_1_r3_c9.webp" alt="front_1_r3_c9.webp" loading="lazy">
+          <div class="card-label">FRONT_1 (r3, c9)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_1/front_1_r4_c0.webp" alt="front_1_r4_c0.webp" loading="lazy">
+          <div class="card-label">FRONT_1 (r4, c0)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_1/front_1_r4_c1.webp" alt="front_1_r4_c1.webp" loading="lazy">
+          <div class="card-label">FRONT_1 (r4, c1)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_1/front_1_r4_c2.webp" alt="front_1_r4_c2.webp" loading="lazy">
+          <div class="card-label">FRONT_1 (r4, c2)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_1/front_1_r4_c3.webp" alt="front_1_r4_c3.webp" loading="lazy">
+          <div class="card-label">FRONT_1 (r4, c3)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_1/front_1_r4_c4.webp" alt="front_1_r4_c4.webp" loading="lazy">
+          <div class="card-label">FRONT_1 (r4, c4)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_1/front_1_r4_c5.webp" alt="front_1_r4_c5.webp" loading="lazy">
+          <div class="card-label">FRONT_1 (r4, c5)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_1/front_1_r4_c6.webp" alt="front_1_r4_c6.webp" loading="lazy">
+          <div class="card-label">FRONT_1 (r4, c6)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_1/front_1_r4_c7.webp" alt="front_1_r4_c7.webp" loading="lazy">
+          <div class="card-label">FRONT_1 (r4, c7)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_1/front_1_r4_c8.webp" alt="front_1_r4_c8.webp" loading="lazy">
+          <div class="card-label">FRONT_1 (r4, c8)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_1/front_1_r4_c9.webp" alt="front_1_r4_c9.webp" loading="lazy">
+          <div class="card-label">FRONT_1 (r4, c9)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_1/front_1_r5_c0.webp" alt="front_1_r5_c0.webp" loading="lazy">
+          <div class="card-label">FRONT_1 (r5, c0)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_1/front_1_r5_c1.webp" alt="front_1_r5_c1.webp" loading="lazy">
+          <div class="card-label">FRONT_1 (r5, c1)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_1/front_1_r5_c2.webp" alt="front_1_r5_c2.webp" loading="lazy">
+          <div class="card-label">FRONT_1 (r5, c2)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_1/front_1_r5_c3.webp" alt="front_1_r5_c3.webp" loading="lazy">
+          <div class="card-label">FRONT_1 (r5, c3)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_1/front_1_r5_c4.webp" alt="front_1_r5_c4.webp" loading="lazy">
+          <div class="card-label">FRONT_1 (r5, c4)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_1/front_1_r5_c5.webp" alt="front_1_r5_c5.webp" loading="lazy">
+          <div class="card-label">FRONT_1 (r5, c5)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_1/front_1_r5_c6.webp" alt="front_1_r5_c6.webp" loading="lazy">
+          <div class="card-label">FRONT_1 (r5, c6)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_1/front_1_r5_c7.webp" alt="front_1_r5_c7.webp" loading="lazy">
+          <div class="card-label">FRONT_1 (r5, c7)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_1/front_1_r5_c8.webp" alt="front_1_r5_c8.webp" loading="lazy">
+          <div class="card-label">FRONT_1 (r5, c8)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_1/front_1_r6_c1.webp" alt="front_1_r6_c1.webp" loading="lazy">
+          <div class="card-label">FRONT_1 (r6, c1)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_1/front_1_r6_c2.webp" alt="front_1_r6_c2.webp" loading="lazy">
+          <div class="card-label">FRONT_1 (r6, c2)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_1/front_1_r6_c4.webp" alt="front_1_r6_c4.webp" loading="lazy">
+          <div class="card-label">FRONT_1 (r6, c4)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_1/front_1_r6_c6.webp" alt="front_1_r6_c6.webp" loading="lazy">
+          <div class="card-label">FRONT_1 (r6, c6)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_1/front_1_r6_c7.webp" alt="front_1_r6_c7.webp" loading="lazy">
+          <div class="card-label">FRONT_1 (r6, c7)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_1/front_1_r6_c8.webp" alt="front_1_r6_c8.webp" loading="lazy">
+          <div class="card-label">FRONT_1 (r6, c8)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_1/front_1_r6_c9.webp" alt="front_1_r6_c9.webp" loading="lazy">
+          <div class="card-label">FRONT_1 (r6, c9)</div>
+        </div>
+        </div></div>
+  <div id="tab-f2" class="tab-content"><div class="grid">
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_2/front_2_r0_c0.webp" alt="front_2_r0_c0.webp" loading="lazy">
+          <div class="card-label">FRONT_2 (r0, c0)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_2/front_2_r0_c1.webp" alt="front_2_r0_c1.webp" loading="lazy">
+          <div class="card-label">FRONT_2 (r0, c1)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_2/front_2_r0_c2.webp" alt="front_2_r0_c2.webp" loading="lazy">
+          <div class="card-label">FRONT_2 (r0, c2)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_2/front_2_r0_c3.webp" alt="front_2_r0_c3.webp" loading="lazy">
+          <div class="card-label">FRONT_2 (r0, c3)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_2/front_2_r0_c4.webp" alt="front_2_r0_c4.webp" loading="lazy">
+          <div class="card-label">FRONT_2 (r0, c4)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_2/front_2_r0_c5.webp" alt="front_2_r0_c5.webp" loading="lazy">
+          <div class="card-label">FRONT_2 (r0, c5)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_2/front_2_r0_c6.webp" alt="front_2_r0_c6.webp" loading="lazy">
+          <div class="card-label">FRONT_2 (r0, c6)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_2/front_2_r0_c7.webp" alt="front_2_r0_c7.webp" loading="lazy">
+          <div class="card-label">FRONT_2 (r0, c7)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_2/front_2_r0_c8.webp" alt="front_2_r0_c8.webp" loading="lazy">
+          <div class="card-label">FRONT_2 (r0, c8)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_2/front_2_r0_c9.webp" alt="front_2_r0_c9.webp" loading="lazy">
+          <div class="card-label">FRONT_2 (r0, c9)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_2/front_2_r1_c0.webp" alt="front_2_r1_c0.webp" loading="lazy">
+          <div class="card-label">FRONT_2 (r1, c0)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_2/front_2_r1_c1.webp" alt="front_2_r1_c1.webp" loading="lazy">
+          <div class="card-label">FRONT_2 (r1, c1)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_2/front_2_r1_c2.webp" alt="front_2_r1_c2.webp" loading="lazy">
+          <div class="card-label">FRONT_2 (r1, c2)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_2/front_2_r1_c3.webp" alt="front_2_r1_c3.webp" loading="lazy">
+          <div class="card-label">FRONT_2 (r1, c3)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_2/front_2_r1_c4.webp" alt="front_2_r1_c4.webp" loading="lazy">
+          <div class="card-label">FRONT_2 (r1, c4)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_2/front_2_r1_c5.webp" alt="front_2_r1_c5.webp" loading="lazy">
+          <div class="card-label">FRONT_2 (r1, c5)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_2/front_2_r1_c6.webp" alt="front_2_r1_c6.webp" loading="lazy">
+          <div class="card-label">FRONT_2 (r1, c6)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_2/front_2_r1_c7.webp" alt="front_2_r1_c7.webp" loading="lazy">
+          <div class="card-label">FRONT_2 (r1, c7)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_2/front_2_r1_c8.webp" alt="front_2_r1_c8.webp" loading="lazy">
+          <div class="card-label">FRONT_2 (r1, c8)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_2/front_2_r1_c9.webp" alt="front_2_r1_c9.webp" loading="lazy">
+          <div class="card-label">FRONT_2 (r1, c9)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_2/front_2_r2_c0.webp" alt="front_2_r2_c0.webp" loading="lazy">
+          <div class="card-label">FRONT_2 (r2, c0)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_2/front_2_r2_c1.webp" alt="front_2_r2_c1.webp" loading="lazy">
+          <div class="card-label">FRONT_2 (r2, c1)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_2/front_2_r2_c2.webp" alt="front_2_r2_c2.webp" loading="lazy">
+          <div class="card-label">FRONT_2 (r2, c2)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_2/front_2_r2_c3.webp" alt="front_2_r2_c3.webp" loading="lazy">
+          <div class="card-label">FRONT_2 (r2, c3)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_2/front_2_r2_c4.webp" alt="front_2_r2_c4.webp" loading="lazy">
+          <div class="card-label">FRONT_2 (r2, c4)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_2/front_2_r2_c5.webp" alt="front_2_r2_c5.webp" loading="lazy">
+          <div class="card-label">FRONT_2 (r2, c5)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_2/front_2_r2_c6.webp" alt="front_2_r2_c6.webp" loading="lazy">
+          <div class="card-label">FRONT_2 (r2, c6)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_2/front_2_r2_c7.webp" alt="front_2_r2_c7.webp" loading="lazy">
+          <div class="card-label">FRONT_2 (r2, c7)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_2/front_2_r2_c8.webp" alt="front_2_r2_c8.webp" loading="lazy">
+          <div class="card-label">FRONT_2 (r2, c8)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_2/front_2_r2_c9.webp" alt="front_2_r2_c9.webp" loading="lazy">
+          <div class="card-label">FRONT_2 (r2, c9)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_2/front_2_r3_c0.webp" alt="front_2_r3_c0.webp" loading="lazy">
+          <div class="card-label">FRONT_2 (r3, c0)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_2/front_2_r3_c1.webp" alt="front_2_r3_c1.webp" loading="lazy">
+          <div class="card-label">FRONT_2 (r3, c1)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_2/front_2_r3_c2.webp" alt="front_2_r3_c2.webp" loading="lazy">
+          <div class="card-label">FRONT_2 (r3, c2)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_2/front_2_r3_c3.webp" alt="front_2_r3_c3.webp" loading="lazy">
+          <div class="card-label">FRONT_2 (r3, c3)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_2/front_2_r3_c4.webp" alt="front_2_r3_c4.webp" loading="lazy">
+          <div class="card-label">FRONT_2 (r3, c4)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_2/front_2_r3_c5.webp" alt="front_2_r3_c5.webp" loading="lazy">
+          <div class="card-label">FRONT_2 (r3, c5)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_2/front_2_r3_c6.webp" alt="front_2_r3_c6.webp" loading="lazy">
+          <div class="card-label">FRONT_2 (r3, c6)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_2/front_2_r3_c7.webp" alt="front_2_r3_c7.webp" loading="lazy">
+          <div class="card-label">FRONT_2 (r3, c7)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_2/front_2_r3_c8.webp" alt="front_2_r3_c8.webp" loading="lazy">
+          <div class="card-label">FRONT_2 (r3, c8)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_2/front_2_r3_c9.webp" alt="front_2_r3_c9.webp" loading="lazy">
+          <div class="card-label">FRONT_2 (r3, c9)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_2/front_2_r4_c0.webp" alt="front_2_r4_c0.webp" loading="lazy">
+          <div class="card-label">FRONT_2 (r4, c0)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_2/front_2_r4_c1.webp" alt="front_2_r4_c1.webp" loading="lazy">
+          <div class="card-label">FRONT_2 (r4, c1)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_2/front_2_r4_c2.webp" alt="front_2_r4_c2.webp" loading="lazy">
+          <div class="card-label">FRONT_2 (r4, c2)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_2/front_2_r4_c3.webp" alt="front_2_r4_c3.webp" loading="lazy">
+          <div class="card-label">FRONT_2 (r4, c3)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_2/front_2_r4_c4.webp" alt="front_2_r4_c4.webp" loading="lazy">
+          <div class="card-label">FRONT_2 (r4, c4)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_2/front_2_r4_c5.webp" alt="front_2_r4_c5.webp" loading="lazy">
+          <div class="card-label">FRONT_2 (r4, c5)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_2/front_2_r4_c6.webp" alt="front_2_r4_c6.webp" loading="lazy">
+          <div class="card-label">FRONT_2 (r4, c6)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_2/front_2_r4_c7.webp" alt="front_2_r4_c7.webp" loading="lazy">
+          <div class="card-label">FRONT_2 (r4, c7)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_2/front_2_r4_c8.webp" alt="front_2_r4_c8.webp" loading="lazy">
+          <div class="card-label">FRONT_2 (r4, c8)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_2/front_2_r4_c9.webp" alt="front_2_r4_c9.webp" loading="lazy">
+          <div class="card-label">FRONT_2 (r4, c9)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_2/front_2_r5_c0.webp" alt="front_2_r5_c0.webp" loading="lazy">
+          <div class="card-label">FRONT_2 (r5, c0)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_2/front_2_r5_c1.webp" alt="front_2_r5_c1.webp" loading="lazy">
+          <div class="card-label">FRONT_2 (r5, c1)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_2/front_2_r5_c2.webp" alt="front_2_r5_c2.webp" loading="lazy">
+          <div class="card-label">FRONT_2 (r5, c2)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_2/front_2_r5_c3.webp" alt="front_2_r5_c3.webp" loading="lazy">
+          <div class="card-label">FRONT_2 (r5, c3)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_2/front_2_r5_c4.webp" alt="front_2_r5_c4.webp" loading="lazy">
+          <div class="card-label">FRONT_2 (r5, c4)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_2/front_2_r5_c5.webp" alt="front_2_r5_c5.webp" loading="lazy">
+          <div class="card-label">FRONT_2 (r5, c5)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_2/front_2_r5_c6.webp" alt="front_2_r5_c6.webp" loading="lazy">
+          <div class="card-label">FRONT_2 (r5, c6)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_2/front_2_r5_c7.webp" alt="front_2_r5_c7.webp" loading="lazy">
+          <div class="card-label">FRONT_2 (r5, c7)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_2/front_2_r5_c8.webp" alt="front_2_r5_c8.webp" loading="lazy">
+          <div class="card-label">FRONT_2 (r5, c8)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_2/front_2_r5_c9.webp" alt="front_2_r5_c9.webp" loading="lazy">
+          <div class="card-label">FRONT_2 (r5, c9)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_2/front_2_r6_c0.webp" alt="front_2_r6_c0.webp" loading="lazy">
+          <div class="card-label">FRONT_2 (r6, c0)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_2/front_2_r6_c1.webp" alt="front_2_r6_c1.webp" loading="lazy">
+          <div class="card-label">FRONT_2 (r6, c1)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_2/front_2_r6_c2.webp" alt="front_2_r6_c2.webp" loading="lazy">
+          <div class="card-label">FRONT_2 (r6, c2)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_2/front_2_r6_c3.webp" alt="front_2_r6_c3.webp" loading="lazy">
+          <div class="card-label">FRONT_2 (r6, c3)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_2/front_2_r6_c4.webp" alt="front_2_r6_c4.webp" loading="lazy">
+          <div class="card-label">FRONT_2 (r6, c4)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_2/front_2_r6_c5.webp" alt="front_2_r6_c5.webp" loading="lazy">
+          <div class="card-label">FRONT_2 (r6, c5)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_2/front_2_r6_c6.webp" alt="front_2_r6_c6.webp" loading="lazy">
+          <div class="card-label">FRONT_2 (r6, c6)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_2/front_2_r6_c7.webp" alt="front_2_r6_c7.webp" loading="lazy">
+          <div class="card-label">FRONT_2 (r6, c7)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_2/front_2_r6_c8.webp" alt="front_2_r6_c8.webp" loading="lazy">
+          <div class="card-label">FRONT_2 (r6, c8)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_2/front_2_r6_c9.webp" alt="front_2_r6_c9.webp" loading="lazy">
+          <div class="card-label">FRONT_2 (r6, c9)</div>
+        </div>
+        </div></div>
+  <div id="tab-f3" class="tab-content"><div class="grid">
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_3/front_3_r0_c0.webp" alt="front_3_r0_c0.webp" loading="lazy">
+          <div class="card-label">FRONT_3 (r0, c0)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_3/front_3_r0_c1.webp" alt="front_3_r0_c1.webp" loading="lazy">
+          <div class="card-label">FRONT_3 (r0, c1)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_3/front_3_r0_c2.webp" alt="front_3_r0_c2.webp" loading="lazy">
+          <div class="card-label">FRONT_3 (r0, c2)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_3/front_3_r0_c3.webp" alt="front_3_r0_c3.webp" loading="lazy">
+          <div class="card-label">FRONT_3 (r0, c3)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_3/front_3_r0_c4.webp" alt="front_3_r0_c4.webp" loading="lazy">
+          <div class="card-label">FRONT_3 (r0, c4)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_3/front_3_r0_c5.webp" alt="front_3_r0_c5.webp" loading="lazy">
+          <div class="card-label">FRONT_3 (r0, c5)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_3/front_3_r0_c6.webp" alt="front_3_r0_c6.webp" loading="lazy">
+          <div class="card-label">FRONT_3 (r0, c6)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_3/front_3_r0_c7.webp" alt="front_3_r0_c7.webp" loading="lazy">
+          <div class="card-label">FRONT_3 (r0, c7)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_3/front_3_r0_c8.webp" alt="front_3_r0_c8.webp" loading="lazy">
+          <div class="card-label">FRONT_3 (r0, c8)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_3/front_3_r0_c9.webp" alt="front_3_r0_c9.webp" loading="lazy">
+          <div class="card-label">FRONT_3 (r0, c9)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_3/front_3_r1_c0.webp" alt="front_3_r1_c0.webp" loading="lazy">
+          <div class="card-label">FRONT_3 (r1, c0)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_3/front_3_r1_c1.webp" alt="front_3_r1_c1.webp" loading="lazy">
+          <div class="card-label">FRONT_3 (r1, c1)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_3/front_3_r1_c2.webp" alt="front_3_r1_c2.webp" loading="lazy">
+          <div class="card-label">FRONT_3 (r1, c2)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_3/front_3_r1_c3.webp" alt="front_3_r1_c3.webp" loading="lazy">
+          <div class="card-label">FRONT_3 (r1, c3)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_3/front_3_r1_c4.webp" alt="front_3_r1_c4.webp" loading="lazy">
+          <div class="card-label">FRONT_3 (r1, c4)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_3/front_3_r1_c5.webp" alt="front_3_r1_c5.webp" loading="lazy">
+          <div class="card-label">FRONT_3 (r1, c5)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_3/front_3_r1_c6.webp" alt="front_3_r1_c6.webp" loading="lazy">
+          <div class="card-label">FRONT_3 (r1, c6)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_3/front_3_r1_c7.webp" alt="front_3_r1_c7.webp" loading="lazy">
+          <div class="card-label">FRONT_3 (r1, c7)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_3/front_3_r1_c8.webp" alt="front_3_r1_c8.webp" loading="lazy">
+          <div class="card-label">FRONT_3 (r1, c8)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_3/front_3_r1_c9.webp" alt="front_3_r1_c9.webp" loading="lazy">
+          <div class="card-label">FRONT_3 (r1, c9)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_3/front_3_r2_c0.webp" alt="front_3_r2_c0.webp" loading="lazy">
+          <div class="card-label">FRONT_3 (r2, c0)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_3/front_3_r2_c1.webp" alt="front_3_r2_c1.webp" loading="lazy">
+          <div class="card-label">FRONT_3 (r2, c1)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_3/front_3_r2_c2.webp" alt="front_3_r2_c2.webp" loading="lazy">
+          <div class="card-label">FRONT_3 (r2, c2)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_3/front_3_r2_c3.webp" alt="front_3_r2_c3.webp" loading="lazy">
+          <div class="card-label">FRONT_3 (r2, c3)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_3/front_3_r2_c4.webp" alt="front_3_r2_c4.webp" loading="lazy">
+          <div class="card-label">FRONT_3 (r2, c4)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_3/front_3_r2_c5.webp" alt="front_3_r2_c5.webp" loading="lazy">
+          <div class="card-label">FRONT_3 (r2, c5)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_3/front_3_r2_c6.webp" alt="front_3_r2_c6.webp" loading="lazy">
+          <div class="card-label">FRONT_3 (r2, c6)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_3/front_3_r2_c7.webp" alt="front_3_r2_c7.webp" loading="lazy">
+          <div class="card-label">FRONT_3 (r2, c7)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_3/front_3_r2_c8.webp" alt="front_3_r2_c8.webp" loading="lazy">
+          <div class="card-label">FRONT_3 (r2, c8)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_3/front_3_r2_c9.webp" alt="front_3_r2_c9.webp" loading="lazy">
+          <div class="card-label">FRONT_3 (r2, c9)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_3/front_3_r3_c0.webp" alt="front_3_r3_c0.webp" loading="lazy">
+          <div class="card-label">FRONT_3 (r3, c0)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_3/front_3_r3_c1.webp" alt="front_3_r3_c1.webp" loading="lazy">
+          <div class="card-label">FRONT_3 (r3, c1)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_3/front_3_r3_c2.webp" alt="front_3_r3_c2.webp" loading="lazy">
+          <div class="card-label">FRONT_3 (r3, c2)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_3/front_3_r3_c3.webp" alt="front_3_r3_c3.webp" loading="lazy">
+          <div class="card-label">FRONT_3 (r3, c3)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_3/front_3_r3_c4.webp" alt="front_3_r3_c4.webp" loading="lazy">
+          <div class="card-label">FRONT_3 (r3, c4)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_3/front_3_r3_c5.webp" alt="front_3_r3_c5.webp" loading="lazy">
+          <div class="card-label">FRONT_3 (r3, c5)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_3/front_3_r3_c6.webp" alt="front_3_r3_c6.webp" loading="lazy">
+          <div class="card-label">FRONT_3 (r3, c6)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_3/front_3_r3_c7.webp" alt="front_3_r3_c7.webp" loading="lazy">
+          <div class="card-label">FRONT_3 (r3, c7)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_3/front_3_r3_c8.webp" alt="front_3_r3_c8.webp" loading="lazy">
+          <div class="card-label">FRONT_3 (r3, c8)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_3/front_3_r3_c9.webp" alt="front_3_r3_c9.webp" loading="lazy">
+          <div class="card-label">FRONT_3 (r3, c9)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_3/front_3_r4_c0.webp" alt="front_3_r4_c0.webp" loading="lazy">
+          <div class="card-label">FRONT_3 (r4, c0)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_3/front_3_r4_c1.webp" alt="front_3_r4_c1.webp" loading="lazy">
+          <div class="card-label">FRONT_3 (r4, c1)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_3/front_3_r4_c2.webp" alt="front_3_r4_c2.webp" loading="lazy">
+          <div class="card-label">FRONT_3 (r4, c2)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_3/front_3_r4_c3.webp" alt="front_3_r4_c3.webp" loading="lazy">
+          <div class="card-label">FRONT_3 (r4, c3)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_3/front_3_r4_c4.webp" alt="front_3_r4_c4.webp" loading="lazy">
+          <div class="card-label">FRONT_3 (r4, c4)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_3/front_3_r4_c5.webp" alt="front_3_r4_c5.webp" loading="lazy">
+          <div class="card-label">FRONT_3 (r4, c5)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_3/front_3_r4_c6.webp" alt="front_3_r4_c6.webp" loading="lazy">
+          <div class="card-label">FRONT_3 (r4, c6)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_3/front_3_r4_c7.webp" alt="front_3_r4_c7.webp" loading="lazy">
+          <div class="card-label">FRONT_3 (r4, c7)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_3/front_3_r4_c8.webp" alt="front_3_r4_c8.webp" loading="lazy">
+          <div class="card-label">FRONT_3 (r4, c8)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_3/front_3_r4_c9.webp" alt="front_3_r4_c9.webp" loading="lazy">
+          <div class="card-label">FRONT_3 (r4, c9)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_3/front_3_r5_c0.webp" alt="front_3_r5_c0.webp" loading="lazy">
+          <div class="card-label">FRONT_3 (r5, c0)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_3/front_3_r5_c1.webp" alt="front_3_r5_c1.webp" loading="lazy">
+          <div class="card-label">FRONT_3 (r5, c1)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_3/front_3_r5_c2.webp" alt="front_3_r5_c2.webp" loading="lazy">
+          <div class="card-label">FRONT_3 (r5, c2)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_3/front_3_r5_c3.webp" alt="front_3_r5_c3.webp" loading="lazy">
+          <div class="card-label">FRONT_3 (r5, c3)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_3/front_3_r5_c4.webp" alt="front_3_r5_c4.webp" loading="lazy">
+          <div class="card-label">FRONT_3 (r5, c4)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_3/front_3_r5_c5.webp" alt="front_3_r5_c5.webp" loading="lazy">
+          <div class="card-label">FRONT_3 (r5, c5)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_3/front_3_r5_c6.webp" alt="front_3_r5_c6.webp" loading="lazy">
+          <div class="card-label">FRONT_3 (r5, c6)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_3/front_3_r5_c7.webp" alt="front_3_r5_c7.webp" loading="lazy">
+          <div class="card-label">FRONT_3 (r5, c7)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_3/front_3_r5_c8.webp" alt="front_3_r5_c8.webp" loading="lazy">
+          <div class="card-label">FRONT_3 (r5, c8)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_3/front_3_r6_c5.webp" alt="front_3_r6_c5.webp" loading="lazy">
+          <div class="card-label">FRONT_3 (r6, c5)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_3/front_3_r6_c7.webp" alt="front_3_r6_c7.webp" loading="lazy">
+          <div class="card-label">FRONT_3 (r6, c7)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_3/front_3_r6_c8.webp" alt="front_3_r6_c8.webp" loading="lazy">
+          <div class="card-label">FRONT_3 (r6, c8)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_3/front_3_r6_c9.webp" alt="front_3_r6_c9.webp" loading="lazy">
+          <div class="card-label">FRONT_3 (r6, c9)</div>
+        </div>
+        </div></div>
+  <div id="tab-b1" class="tab-content"><div class="grid">
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_1/back_1_r0_c0.webp" alt="back_1_r0_c0.webp" loading="lazy">
+          <div class="card-label">BACK_1 (r0, c0)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_1/back_1_r0_c1.webp" alt="back_1_r0_c1.webp" loading="lazy">
+          <div class="card-label">BACK_1 (r0, c1)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_1/back_1_r0_c2.webp" alt="back_1_r0_c2.webp" loading="lazy">
+          <div class="card-label">BACK_1 (r0, c2)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_1/back_1_r0_c3.webp" alt="back_1_r0_c3.webp" loading="lazy">
+          <div class="card-label">BACK_1 (r0, c3)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_1/back_1_r0_c4.webp" alt="back_1_r0_c4.webp" loading="lazy">
+          <div class="card-label">BACK_1 (r0, c4)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_1/back_1_r0_c5.webp" alt="back_1_r0_c5.webp" loading="lazy">
+          <div class="card-label">BACK_1 (r0, c5)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_1/back_1_r0_c6.webp" alt="back_1_r0_c6.webp" loading="lazy">
+          <div class="card-label">BACK_1 (r0, c6)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_1/back_1_r0_c7.webp" alt="back_1_r0_c7.webp" loading="lazy">
+          <div class="card-label">BACK_1 (r0, c7)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_1/back_1_r0_c8.webp" alt="back_1_r0_c8.webp" loading="lazy">
+          <div class="card-label">BACK_1 (r0, c8)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_1/back_1_r0_c9.webp" alt="back_1_r0_c9.webp" loading="lazy">
+          <div class="card-label">BACK_1 (r0, c9)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_1/back_1_r1_c0.webp" alt="back_1_r1_c0.webp" loading="lazy">
+          <div class="card-label">BACK_1 (r1, c0)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_1/back_1_r1_c1.webp" alt="back_1_r1_c1.webp" loading="lazy">
+          <div class="card-label">BACK_1 (r1, c1)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_1/back_1_r1_c2.webp" alt="back_1_r1_c2.webp" loading="lazy">
+          <div class="card-label">BACK_1 (r1, c2)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_1/back_1_r1_c3.webp" alt="back_1_r1_c3.webp" loading="lazy">
+          <div class="card-label">BACK_1 (r1, c3)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_1/back_1_r1_c4.webp" alt="back_1_r1_c4.webp" loading="lazy">
+          <div class="card-label">BACK_1 (r1, c4)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_1/back_1_r1_c5.webp" alt="back_1_r1_c5.webp" loading="lazy">
+          <div class="card-label">BACK_1 (r1, c5)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_1/back_1_r1_c6.webp" alt="back_1_r1_c6.webp" loading="lazy">
+          <div class="card-label">BACK_1 (r1, c6)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_1/back_1_r1_c7.webp" alt="back_1_r1_c7.webp" loading="lazy">
+          <div class="card-label">BACK_1 (r1, c7)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_1/back_1_r1_c8.webp" alt="back_1_r1_c8.webp" loading="lazy">
+          <div class="card-label">BACK_1 (r1, c8)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_1/back_1_r1_c9.webp" alt="back_1_r1_c9.webp" loading="lazy">
+          <div class="card-label">BACK_1 (r1, c9)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_1/back_1_r2_c0.webp" alt="back_1_r2_c0.webp" loading="lazy">
+          <div class="card-label">BACK_1 (r2, c0)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_1/back_1_r2_c1.webp" alt="back_1_r2_c1.webp" loading="lazy">
+          <div class="card-label">BACK_1 (r2, c1)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_1/back_1_r2_c2.webp" alt="back_1_r2_c2.webp" loading="lazy">
+          <div class="card-label">BACK_1 (r2, c2)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_1/back_1_r2_c3.webp" alt="back_1_r2_c3.webp" loading="lazy">
+          <div class="card-label">BACK_1 (r2, c3)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_1/back_1_r2_c4.webp" alt="back_1_r2_c4.webp" loading="lazy">
+          <div class="card-label">BACK_1 (r2, c4)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_1/back_1_r2_c5.webp" alt="back_1_r2_c5.webp" loading="lazy">
+          <div class="card-label">BACK_1 (r2, c5)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_1/back_1_r2_c6.webp" alt="back_1_r2_c6.webp" loading="lazy">
+          <div class="card-label">BACK_1 (r2, c6)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_1/back_1_r2_c7.webp" alt="back_1_r2_c7.webp" loading="lazy">
+          <div class="card-label">BACK_1 (r2, c7)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_1/back_1_r2_c8.webp" alt="back_1_r2_c8.webp" loading="lazy">
+          <div class="card-label">BACK_1 (r2, c8)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_1/back_1_r2_c9.webp" alt="back_1_r2_c9.webp" loading="lazy">
+          <div class="card-label">BACK_1 (r2, c9)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_1/back_1_r3_c0.webp" alt="back_1_r3_c0.webp" loading="lazy">
+          <div class="card-label">BACK_1 (r3, c0)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_1/back_1_r3_c1.webp" alt="back_1_r3_c1.webp" loading="lazy">
+          <div class="card-label">BACK_1 (r3, c1)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_1/back_1_r3_c2.webp" alt="back_1_r3_c2.webp" loading="lazy">
+          <div class="card-label">BACK_1 (r3, c2)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_1/back_1_r3_c3.webp" alt="back_1_r3_c3.webp" loading="lazy">
+          <div class="card-label">BACK_1 (r3, c3)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_1/back_1_r3_c4.webp" alt="back_1_r3_c4.webp" loading="lazy">
+          <div class="card-label">BACK_1 (r3, c4)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_1/back_1_r3_c5.webp" alt="back_1_r3_c5.webp" loading="lazy">
+          <div class="card-label">BACK_1 (r3, c5)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_1/back_1_r3_c6.webp" alt="back_1_r3_c6.webp" loading="lazy">
+          <div class="card-label">BACK_1 (r3, c6)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_1/back_1_r3_c7.webp" alt="back_1_r3_c7.webp" loading="lazy">
+          <div class="card-label">BACK_1 (r3, c7)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_1/back_1_r3_c8.webp" alt="back_1_r3_c8.webp" loading="lazy">
+          <div class="card-label">BACK_1 (r3, c8)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_1/back_1_r3_c9.webp" alt="back_1_r3_c9.webp" loading="lazy">
+          <div class="card-label">BACK_1 (r3, c9)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_1/back_1_r4_c0.webp" alt="back_1_r4_c0.webp" loading="lazy">
+          <div class="card-label">BACK_1 (r4, c0)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_1/back_1_r4_c1.webp" alt="back_1_r4_c1.webp" loading="lazy">
+          <div class="card-label">BACK_1 (r4, c1)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_1/back_1_r4_c2.webp" alt="back_1_r4_c2.webp" loading="lazy">
+          <div class="card-label">BACK_1 (r4, c2)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_1/back_1_r4_c3.webp" alt="back_1_r4_c3.webp" loading="lazy">
+          <div class="card-label">BACK_1 (r4, c3)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_1/back_1_r4_c4.webp" alt="back_1_r4_c4.webp" loading="lazy">
+          <div class="card-label">BACK_1 (r4, c4)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_1/back_1_r4_c5.webp" alt="back_1_r4_c5.webp" loading="lazy">
+          <div class="card-label">BACK_1 (r4, c5)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_1/back_1_r4_c6.webp" alt="back_1_r4_c6.webp" loading="lazy">
+          <div class="card-label">BACK_1 (r4, c6)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_1/back_1_r4_c7.webp" alt="back_1_r4_c7.webp" loading="lazy">
+          <div class="card-label">BACK_1 (r4, c7)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_1/back_1_r4_c8.webp" alt="back_1_r4_c8.webp" loading="lazy">
+          <div class="card-label">BACK_1 (r4, c8)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_1/back_1_r4_c9.webp" alt="back_1_r4_c9.webp" loading="lazy">
+          <div class="card-label">BACK_1 (r4, c9)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_1/back_1_r5_c0.webp" alt="back_1_r5_c0.webp" loading="lazy">
+          <div class="card-label">BACK_1 (r5, c0)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_1/back_1_r5_c1.webp" alt="back_1_r5_c1.webp" loading="lazy">
+          <div class="card-label">BACK_1 (r5, c1)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_1/back_1_r5_c2.webp" alt="back_1_r5_c2.webp" loading="lazy">
+          <div class="card-label">BACK_1 (r5, c2)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_1/back_1_r5_c3.webp" alt="back_1_r5_c3.webp" loading="lazy">
+          <div class="card-label">BACK_1 (r5, c3)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_1/back_1_r5_c4.webp" alt="back_1_r5_c4.webp" loading="lazy">
+          <div class="card-label">BACK_1 (r5, c4)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_1/back_1_r5_c5.webp" alt="back_1_r5_c5.webp" loading="lazy">
+          <div class="card-label">BACK_1 (r5, c5)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_1/back_1_r5_c6.webp" alt="back_1_r5_c6.webp" loading="lazy">
+          <div class="card-label">BACK_1 (r5, c6)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_1/back_1_r5_c7.webp" alt="back_1_r5_c7.webp" loading="lazy">
+          <div class="card-label">BACK_1 (r5, c7)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_1/back_1_r5_c8.webp" alt="back_1_r5_c8.webp" loading="lazy">
+          <div class="card-label">BACK_1 (r5, c8)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_1/back_1_r6_c9.webp" alt="back_1_r6_c9.webp" loading="lazy">
+          <div class="card-label">BACK_1 (r6, c9)</div>
+        </div>
+        </div></div>
+  <div id="tab-b2" class="tab-content"><div class="grid">
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_2/back_2_r0_c0.webp" alt="back_2_r0_c0.webp" loading="lazy">
+          <div class="card-label">BACK_2 (r0, c0)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_2/back_2_r0_c1.webp" alt="back_2_r0_c1.webp" loading="lazy">
+          <div class="card-label">BACK_2 (r0, c1)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_2/back_2_r0_c2.webp" alt="back_2_r0_c2.webp" loading="lazy">
+          <div class="card-label">BACK_2 (r0, c2)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_2/back_2_r0_c3.webp" alt="back_2_r0_c3.webp" loading="lazy">
+          <div class="card-label">BACK_2 (r0, c3)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_2/back_2_r0_c4.webp" alt="back_2_r0_c4.webp" loading="lazy">
+          <div class="card-label">BACK_2 (r0, c4)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_2/back_2_r0_c5.webp" alt="back_2_r0_c5.webp" loading="lazy">
+          <div class="card-label">BACK_2 (r0, c5)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_2/back_2_r0_c6.webp" alt="back_2_r0_c6.webp" loading="lazy">
+          <div class="card-label">BACK_2 (r0, c6)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_2/back_2_r0_c7.webp" alt="back_2_r0_c7.webp" loading="lazy">
+          <div class="card-label">BACK_2 (r0, c7)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_2/back_2_r0_c8.webp" alt="back_2_r0_c8.webp" loading="lazy">
+          <div class="card-label">BACK_2 (r0, c8)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_2/back_2_r0_c9.webp" alt="back_2_r0_c9.webp" loading="lazy">
+          <div class="card-label">BACK_2 (r0, c9)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_2/back_2_r1_c0.webp" alt="back_2_r1_c0.webp" loading="lazy">
+          <div class="card-label">BACK_2 (r1, c0)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_2/back_2_r1_c1.webp" alt="back_2_r1_c1.webp" loading="lazy">
+          <div class="card-label">BACK_2 (r1, c1)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_2/back_2_r1_c2.webp" alt="back_2_r1_c2.webp" loading="lazy">
+          <div class="card-label">BACK_2 (r1, c2)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_2/back_2_r1_c3.webp" alt="back_2_r1_c3.webp" loading="lazy">
+          <div class="card-label">BACK_2 (r1, c3)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_2/back_2_r1_c4.webp" alt="back_2_r1_c4.webp" loading="lazy">
+          <div class="card-label">BACK_2 (r1, c4)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_2/back_2_r1_c5.webp" alt="back_2_r1_c5.webp" loading="lazy">
+          <div class="card-label">BACK_2 (r1, c5)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_2/back_2_r1_c6.webp" alt="back_2_r1_c6.webp" loading="lazy">
+          <div class="card-label">BACK_2 (r1, c6)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_2/back_2_r1_c7.webp" alt="back_2_r1_c7.webp" loading="lazy">
+          <div class="card-label">BACK_2 (r1, c7)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_2/back_2_r1_c8.webp" alt="back_2_r1_c8.webp" loading="lazy">
+          <div class="card-label">BACK_2 (r1, c8)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_2/back_2_r1_c9.webp" alt="back_2_r1_c9.webp" loading="lazy">
+          <div class="card-label">BACK_2 (r1, c9)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_2/back_2_r2_c0.webp" alt="back_2_r2_c0.webp" loading="lazy">
+          <div class="card-label">BACK_2 (r2, c0)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_2/back_2_r2_c1.webp" alt="back_2_r2_c1.webp" loading="lazy">
+          <div class="card-label">BACK_2 (r2, c1)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_2/back_2_r2_c2.webp" alt="back_2_r2_c2.webp" loading="lazy">
+          <div class="card-label">BACK_2 (r2, c2)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_2/back_2_r2_c3.webp" alt="back_2_r2_c3.webp" loading="lazy">
+          <div class="card-label">BACK_2 (r2, c3)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_2/back_2_r2_c4.webp" alt="back_2_r2_c4.webp" loading="lazy">
+          <div class="card-label">BACK_2 (r2, c4)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_2/back_2_r2_c5.webp" alt="back_2_r2_c5.webp" loading="lazy">
+          <div class="card-label">BACK_2 (r2, c5)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_2/back_2_r2_c6.webp" alt="back_2_r2_c6.webp" loading="lazy">
+          <div class="card-label">BACK_2 (r2, c6)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_2/back_2_r2_c7.webp" alt="back_2_r2_c7.webp" loading="lazy">
+          <div class="card-label">BACK_2 (r2, c7)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_2/back_2_r2_c8.webp" alt="back_2_r2_c8.webp" loading="lazy">
+          <div class="card-label">BACK_2 (r2, c8)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_2/back_2_r2_c9.webp" alt="back_2_r2_c9.webp" loading="lazy">
+          <div class="card-label">BACK_2 (r2, c9)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_2/back_2_r3_c0.webp" alt="back_2_r3_c0.webp" loading="lazy">
+          <div class="card-label">BACK_2 (r3, c0)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_2/back_2_r3_c1.webp" alt="back_2_r3_c1.webp" loading="lazy">
+          <div class="card-label">BACK_2 (r3, c1)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_2/back_2_r3_c2.webp" alt="back_2_r3_c2.webp" loading="lazy">
+          <div class="card-label">BACK_2 (r3, c2)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_2/back_2_r3_c3.webp" alt="back_2_r3_c3.webp" loading="lazy">
+          <div class="card-label">BACK_2 (r3, c3)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_2/back_2_r3_c4.webp" alt="back_2_r3_c4.webp" loading="lazy">
+          <div class="card-label">BACK_2 (r3, c4)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_2/back_2_r3_c5.webp" alt="back_2_r3_c5.webp" loading="lazy">
+          <div class="card-label">BACK_2 (r3, c5)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_2/back_2_r3_c6.webp" alt="back_2_r3_c6.webp" loading="lazy">
+          <div class="card-label">BACK_2 (r3, c6)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_2/back_2_r3_c7.webp" alt="back_2_r3_c7.webp" loading="lazy">
+          <div class="card-label">BACK_2 (r3, c7)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_2/back_2_r3_c8.webp" alt="back_2_r3_c8.webp" loading="lazy">
+          <div class="card-label">BACK_2 (r3, c8)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_2/back_2_r3_c9.webp" alt="back_2_r3_c9.webp" loading="lazy">
+          <div class="card-label">BACK_2 (r3, c9)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_2/back_2_r4_c0.webp" alt="back_2_r4_c0.webp" loading="lazy">
+          <div class="card-label">BACK_2 (r4, c0)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_2/back_2_r4_c1.webp" alt="back_2_r4_c1.webp" loading="lazy">
+          <div class="card-label">BACK_2 (r4, c1)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_2/back_2_r4_c2.webp" alt="back_2_r4_c2.webp" loading="lazy">
+          <div class="card-label">BACK_2 (r4, c2)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_2/back_2_r4_c3.webp" alt="back_2_r4_c3.webp" loading="lazy">
+          <div class="card-label">BACK_2 (r4, c3)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_2/back_2_r4_c4.webp" alt="back_2_r4_c4.webp" loading="lazy">
+          <div class="card-label">BACK_2 (r4, c4)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_2/back_2_r4_c5.webp" alt="back_2_r4_c5.webp" loading="lazy">
+          <div class="card-label">BACK_2 (r4, c5)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_2/back_2_r4_c6.webp" alt="back_2_r4_c6.webp" loading="lazy">
+          <div class="card-label">BACK_2 (r4, c6)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_2/back_2_r4_c7.webp" alt="back_2_r4_c7.webp" loading="lazy">
+          <div class="card-label">BACK_2 (r4, c7)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_2/back_2_r4_c8.webp" alt="back_2_r4_c8.webp" loading="lazy">
+          <div class="card-label">BACK_2 (r4, c8)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_2/back_2_r4_c9.webp" alt="back_2_r4_c9.webp" loading="lazy">
+          <div class="card-label">BACK_2 (r4, c9)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_2/back_2_r5_c0.webp" alt="back_2_r5_c0.webp" loading="lazy">
+          <div class="card-label">BACK_2 (r5, c0)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_2/back_2_r5_c1.webp" alt="back_2_r5_c1.webp" loading="lazy">
+          <div class="card-label">BACK_2 (r5, c1)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_2/back_2_r5_c2.webp" alt="back_2_r5_c2.webp" loading="lazy">
+          <div class="card-label">BACK_2 (r5, c2)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_2/back_2_r5_c3.webp" alt="back_2_r5_c3.webp" loading="lazy">
+          <div class="card-label">BACK_2 (r5, c3)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_2/back_2_r5_c4.webp" alt="back_2_r5_c4.webp" loading="lazy">
+          <div class="card-label">BACK_2 (r5, c4)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_2/back_2_r5_c5.webp" alt="back_2_r5_c5.webp" loading="lazy">
+          <div class="card-label">BACK_2 (r5, c5)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_2/back_2_r5_c6.webp" alt="back_2_r5_c6.webp" loading="lazy">
+          <div class="card-label">BACK_2 (r5, c6)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_2/back_2_r5_c7.webp" alt="back_2_r5_c7.webp" loading="lazy">
+          <div class="card-label">BACK_2 (r5, c7)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_2/back_2_r5_c8.webp" alt="back_2_r5_c8.webp" loading="lazy">
+          <div class="card-label">BACK_2 (r5, c8)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_2/back_2_r6_c9.webp" alt="back_2_r6_c9.webp" loading="lazy">
+          <div class="card-label">BACK_2 (r6, c9)</div>
+        </div>
+        </div></div>
+  
+  <div class="modal" id="modal" onclick="this.classList.remove('active')">
+    <img id="modal-img" src="" alt="zoom">
+  </div>
+  
+  <script>
+    function showTab(id, btn) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+      document.getElementById('tab-' + id).classList.add('active');
+      btn.classList.add('active');
+    }
+    function zoom(el) {
+      const img = el.querySelector('img');
+      document.getElementById('modal-img').src = img.src;
+      document.getElementById('modal').classList.add('active');
+    }
+  </script>
+</body>
+</html>
