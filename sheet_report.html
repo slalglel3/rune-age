@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>룬 에이지 (Rune Age) 스캔 시트 정밀 분석 리포트</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #0f172a;
+      color: #f1f5f9;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      padding: 24px;
+      line-height: 1.6;
+    }
+    h1 { font-size: 24px; color: #f8fafc; margin-bottom: 8px; }
+    .subtitle { color: #94a3b8; font-size: 14px; margin-bottom: 24px; }
+    
+    .stats-card {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin-bottom: 24px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+    }
+    .stat-item { display: flex; flex-direction: column; }
+    .stat-label { font-size: 12px; color: #94a3b8; text-transform: uppercase; font-weight: 600; }
+    .stat-val { font-size: 18px; color: #38bdf8; font-weight: 700; margin-top: 4px; }
+    
+    .section-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin: 28px 0 12px;
+      padding-bottom: 6px;
+      border-bottom: 2px solid #334155;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .badge {
+      font-size: 12px;
+      padding: 2px 8px;
+      border-radius: 4px;
+      background: #0284c7;
+      color: #fff;
+    }
+    
+    .sheet-container {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 20px;
+    }
+    .sheet-header {
+      font-weight: 600;
+      color: #f8fafc;
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .sheet-img-wrap {
+      width: 100%;
+      overflow-x: auto;
+      border-radius: 6px;
+      background: #000;
+    }
+    .sheet-img-wrap img {
+      width: 100%;
+      max-width: 1000px;
+      display: block;
+      margin: 0 auto;
+    }
+    .callout {
+      background: rgba(56, 189, 248, 0.1);
+      border-left: 4px solid #38bdf8;
+      padding: 12px 16px;
+      border-radius: 0 6px 6px 0;
+      margin: 16px 0;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🔍 룬 에이지 (Rune Age) 고화질 스캔 시트 정밀 분석 리포트</h1>
+  <div style="margin: 20px 0; padding: 16px; background: #0369a1; border-radius: 8px; text-align: center;">
+    <a href="inspect.html" style="color: #fff; font-size: 16px; font-weight: bold; text-decoration: none;">
+      👉 [새 창 열기] 319장 분리 카드 인스펙터 (개별 카드 크게 보기) 바로가기
+    </a>
+  </div>
+
+  <p class="subtitle">첨부해 주신 5장의 대형 스캔 이미지(앞면 3장, 뒷면 2장)를 컴퓨터 비전(OpenCV)으로 분석한 결과입니다.</p>
+
+  <div class="stats-card">
+    <div class="stat-item">
+      <span class="stat-label">스캔 원본 해상도</span>
+      <span class="stat-val">4000 × 4431 px</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-label">단일 카드 검출 크기</span>
+      <span class="stat-val">약 400 × 630 px</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-label">카드 종횡비</span>
+      <span class="stat-val">1 : 1.575 (FFG 표준 57×89mm)</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-label">시트당 카드 배치</span>
+      <span class="stat-val">10열 × 6행 (최대 60장/시트)</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-label">앞면 카드 총 수량</span>
+      <span class="stat-val">약 170 ~ 180장 (풀 세트)</span>
+    </div>
+  </div>
+
+  <div class="callout">
+    <strong>💡 분석 요약 및 향후 처리 방침</strong><br>
+    • <strong>카드 규격의 정확성:</strong> 가로 400px, 세로 630px 간격으로 매우 정갈하게 10열 × 6행 바둑판 형태로 배치되어 있어, 오차 1~2px 이내의 정밀 슬라이싱이 가능합니다.<br>
+    • <strong>뒷면 매칭 원칙 준수:</strong> 요청하신 대로 앞면과 뒷면을 임의로 짝지어 매칭하지 않고, <strong>앞면은 카드명/진영별로 1:1 매칭 분리</strong>하고, <strong>뒷면은 개별 카드 이미지로 깔끔히 잘라내어 별도 폴더에 보존</strong>합니다.
+  </div>
+
+  <!-- 앞면 시트 1 -->
+  <div class="section-title"><span>🃏 카드 앞면 스캔 시트 (Fronts)</span> <span class="badge">3장</span></div>
+  
+  <div class="sheet-container">
+    <div class="sheet-header">
+      <span>1. front_1 (4000 × 4431 px) — 격자 검출 오버레이 (녹색: 세로선 / 적색: 가로선)</span>
+      <span style="font-size: 13px; color: #94a3b8;">약 60장 수록</span>
+    </div>
+    <div class="sheet-img-wrap">
+      <img src="previews/front_1_grid.jpg" alt="front_1 grid">
+    </div>
+  </div>
+
+  <div class="sheet-container">
+    <div class="sheet-header">
+      <span>2. front_2 (4000 × 4431 px) — 격자 검출 오버레이</span>
+      <span style="font-size: 13px; color: #94a3b8;">약 60장 수록</span>
+    </div>
+    <div class="sheet-img-wrap">
+      <img src="previews/front_2_grid.jpg" alt="front_2 grid">
+    </div>
+  </div>
+
+  <div class="sheet-container">
+    <div class="sheet-header">
+      <span>3. front_3 (4000 × 4431 px) — 격자 검출 오버레이</span>
+      <span style="font-size: 13px; color: #94a3b8;">약 60장 수록</span>
+    </div>
+    <div class="sheet-img-wrap">
+      <img src="previews/front_3_grid.jpg" alt="front_3 grid">
+    </div>
+  </div>
+
+  <!-- 뒷면 시트 2장 -->
+  <div class="section-title"><span>🛡️ 카드 뒷면 스캔 시트 (Backs)</span> <span class="badge">2장</span></div>
+
+  <div class="sheet-container">
+    <div class="sheet-header">
+      <span>4. back_1 (4000 × 4431 px) — 플레이어/이벤트/용병 등 뒷면 시트</span>
+      <span style="font-size: 13px; color: #94a3b8;">개별 분리 저장 예정</span>
+    </div>
+    <div class="sheet-img-wrap">
+      <img src="previews/back_1_grid.jpg" alt="back_1 grid">
+    </div>
+  </div>
+
+  <div class="sheet-container">
+    <div class="sheet-header">
+      <span>5. back_2 (4000 × 4431 px) — 뒷면 시트</span>
+      <span style="font-size: 13px; color: #94a3b8;">개별 분리 저장 예정</span>
+    </div>
+    <div class="sheet-img-wrap">
+      <img src="previews/back_2_grid.jpg" alt="back_2 grid">
+    </div>
+  </div>
+
+</body>
+</html>
