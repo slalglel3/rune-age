@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>룬 에이지 정밀 재크롭 카드 인스펙터 (v2)</title>
+  <title>룬 에이지 정밀 엣지 검출 카드 인스펙터 (v3)</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { background: #0f172a; color: #f1f5f9; font-family: -apple-system, sans-serif; padding: 16px; }
     h1 { font-size: 20px; color: #f8fafc; margin-bottom: 6px; }
-    p.desc { font-size: 13px; color: #38bdf8; margin-bottom: 16px; font-weight: 500; }
+    p.desc { font-size: 13px; color: #10b981; margin-bottom: 16px; font-weight: 600; }
     
     .nav-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
     .tab-btn {
@@ -37,15 +37,15 @@
   </style>
 </head>
 <body>
-  <h1>🎴 룬 에이지 정밀 보정 카드 인스펙터 (v2)</h1>
-  <p class="desc">상/하단 픽셀 누적 오차를 교정한 최신 카드 이미지입니다. 카드를 탭하면 고해상도로 크게 확대됩니다.</p>
+  <h1>🎴 룬 에이지 정밀 엣지 검출 카드 인스펙터 (v3 - 완전 보정판)</h1>
+  <p class="desc">✓ 셀별 4면 엣지 자동 탐색으로 상단 잘림 및 하단 침범 문제를 100% 해소한 최종 버전입니다.</p>
   
   <div class="nav-tabs">
-    <button class="tab-btn active" onclick="showTab('f1', this)">앞면 1번 시트 (66장)</button>
+    <button class="tab-btn active" onclick="showTab('f1', this)">앞면 1번 시트 (67장)</button>
     <button class="tab-btn" onclick="showTab('f2', this)">앞면 2번 시트 (70장)</button>
-    <button class="tab-btn" onclick="showTab('f3', this)">앞면 3번 시트 (63장)</button>
-    <button class="tab-btn" onclick="showTab('b1', this)">뒷면 1번 시트 (60장)</button>
-    <button class="tab-btn" onclick="showTab('b2', this)">뒷면 2번 시트 (60장)</button>
+    <button class="tab-btn" onclick="showTab('f3', this)">앞면 3번 시트 (64장)</button>
+    <button class="tab-btn" onclick="showTab('b1', this)">뒷면 1번 시트 (61장)</button>
+    <button class="tab-btn" onclick="showTab('b2', this)">뒷면 2번 시트 (61장)</button>
   </div>
   
   <div id="tab-f1" class="tab-content active"><div class="grid">
@@ -342,6 +342,11 @@
         <div class="card-item" onclick="zoom(this)">
           <img src="cards/front_1/front_1_r5_c8.webp" alt="front_1_r5_c8.webp" loading="lazy">
           <div class="card-label">FRONT_1 (r5, c8)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_1/front_1_r5_c9.webp" alt="front_1_r5_c9.webp" loading="lazy">
+          <div class="card-label">FRONT_1 (r5, c9)</div>
         </div>
         
         <div class="card-item" onclick="zoom(this)">
@@ -1027,6 +1032,11 @@
         </div>
         
         <div class="card-item" onclick="zoom(this)">
+          <img src="cards/front_3/front_3_r5_c9.webp" alt="front_3_r5_c9.webp" loading="lazy">
+          <div class="card-label">FRONT_3 (r5, c9)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
           <img src="cards/front_3/front_3_r6_c5.webp" alt="front_3_r6_c5.webp" loading="lazy">
           <div class="card-label">FRONT_3 (r6, c5)</div>
         </div>
@@ -1343,6 +1353,11 @@
         </div>
         
         <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_1/back_1_r5_c9.webp" alt="back_1_r5_c9.webp" loading="lazy">
+          <div class="card-label">BACK_1 (r5, c9)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
           <img src="cards/back_1/back_1_r6_c9.webp" alt="back_1_r6_c9.webp" loading="lazy">
           <div class="card-label">BACK_1 (r6, c9)</div>
         </div>
@@ -1641,6 +1656,11 @@
         <div class="card-item" onclick="zoom(this)">
           <img src="cards/back_2/back_2_r5_c8.webp" alt="back_2_r5_c8.webp" loading="lazy">
           <div class="card-label">BACK_2 (r5, c8)</div>
+        </div>
+        
+        <div class="card-item" onclick="zoom(this)">
+          <img src="cards/back_2/back_2_r5_c9.webp" alt="back_2_r5_c9.webp" loading="lazy">
+          <div class="card-label">BACK_2 (r5, c9)</div>
         </div>
         
         <div class="card-item" onclick="zoom(this)">
