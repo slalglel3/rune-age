@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>룬 에이지 (Rune Age) 카드 에셋 갤러리 검토기</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #0f172a;
+      color: #f1f5f9;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      padding: 24px;
+    }
+    h1 { font-size: 24px; margin-bottom: 8px; color: #f8fafc; }
+    p.desc { color: #94a3b8; margin-bottom: 24px; font-size: 14px; }
+    .section-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin: 28px 0 12px;
+      padding-bottom: 6px;
+      border-bottom: 2px solid #334155;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .badge {
+      font-size: 12px;
+      padding: 2px 8px;
+      border-radius: 4px;
+      background: #1e293b;
+      color: #38bdf8;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 16px;
+    }
+    .card-box {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: transform 0.2s, border-color 0.2s;
+      cursor: pointer;
+    }
+    .card-box:hover {
+      transform: translateY(-4px);
+      border-color: #38bdf8;
+    }
+    .card-box img {
+      width: 100%;
+      aspect-ratio: 5 / 7;
+      object-fit: cover;
+      border-radius: 6px;
+      background: #090d16;
+    }
+    .card-title {
+      font-size: 13px;
+      font-weight: 600;
+      margin-top: 8px;
+      text-align: center;
+      color: #f1f5f9;
+      word-break: keep-all;
+    }
+    .card-file {
+      font-size: 11px;
+      color: #64748b;
+      margin-top: 2px;
+      text-align: center;
+      word-break: break-all;
+    }
+    /* Modal for zoom */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.85);
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      padding: 20px;
+    }
+    .modal.active { display: flex; }
+    .modal img {
+      max-width: 90vw;
+      max-height: 85vh;
+      border-radius: 12px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+      border: 2px solid #38bdf8;
+    }
+    .modal-close {
+      position: absolute;
+      top: 20px;
+      right: 25px;
+      color: #f8fafc;
+      font-size: 32px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🛡️ 룬 에이지 (Rune Age) 카드 에셋 검토 갤러리</h1>
+  <p class="desc">카드를 클릭하면 고해상도로 크게 확대해서 볼 수 있습니다. 파일 위치: <code>/home/slalglel/rune_age_assets/</code></p>
+
+  <!-- 카드 뒷면 -->
+  <div class="section-title"><span>🃏 카드 뒷면 (Card Backs)</span> <span class="badge">3종</span></div>
+  <div class="grid">
+    <div class="card-box" onclick="zoom(this)">
+      <img src="cards/backs/back_player.webp" alt="플레이어 덱 공통 뒷면">
+      <div class="card-title">플레이어 덱 공통 뒷면</div>
+      <div class="card-file">cards/backs/back_player.webp</div>
+    </div>
+    <div class="card-box" onclick="zoom(this)">
+      <img src="cards/backs/back_event.webp" alt="이벤트 덱 뒷면">
+      <div class="card-title">이벤트 덱 뒷면</div>
+      <div class="card-file">cards/backs/back_event.webp</div>
+    </div>
+    <div class="card-box" onclick="zoom(this)">
+      <img src="cards/backs/back_dragon.webp" alt="드래곤 로드 뒷면">
+      <div class="card-title">드래곤 로드 뒷면</div>
+      <div class="card-file">cards/backs/back_dragon.webp</div>
+    </div>
+  </div>
+
+  <!-- 다칸 연합 -->
+  <div class="section-title"><span>👑 다칸 연합 (The Daqan Lords - 인간)</span> <span class="badge">6종</span></div>
+  <div class="grid">
+    <div class="card-box" onclick="zoom(this)">
+      <img src="cards/daqan/daqan_realm.webp" alt="다칸 홈 렐름">
+      <div class="card-title">다칸 홈 렐름 (HP 20)</div>
+      <div class="card-file">cards/daqan/daqan_realm.webp</div>
+    </div>
+    <div class="card-box" onclick="zoom(this)">
+      <img src="cards/daqan/daqan_stronghold.webp" alt="다칸 요새">
+      <div class="card-title">다칸 요새 (영향력 2)</div>
+      <div class="card-file">cards/daqan/daqan_stronghold.webp</div>
+    </div>
+    <div class="card-box" onclick="zoom(this)">
+      <img src="cards/daqan/unit_footman.webp" alt="보병 (Footman)">
+      <div class="card-title">보병 (비용 1 / 공격 1)</div>
+      <div class="card-file">cards/daqan/unit_footman.webp</div>
+    </div>
+    <div class="card-box" onclick="zoom(this)">
+      <img src="cards/daqan/unit_bowman.webp" alt="궁병 (Bowman)">
+      <div class="card-title">궁병 (비용 2 / 공격 2)</div>
+      <div class="card-file">cards/daqan/unit_bowman.webp</div>
+    </div>
+    <div class="card-box" onclick="zoom(this)">
+      <img src="cards/daqan/unit_knight.webp" alt="기사 (Knight)">
+      <div class="card-title">기사 (비용 3 / 공격 3)</div>
+      <div class="card-file">cards/daqan/unit_knight.webp</div>
+    </div>
+    <div class="card-box" onclick="zoom(this)">
+      <img src="cards/daqan/unit_siege_engine.webp" alt="공성 병기 (Siege Engine)">
+      <div class="card-title">공성 병기 (비용 5 / 공격 4)</div>
+      <div class="card-file">cards/daqan/unit_siege_engine.webp</div>
+    </div>
+  </div>
+
+  <!-- 라타리 엘프 -->
+  <div class="section-title"><span>🏹 라타리 엘프 (The Latari Elves - 엘프)</span> <span class="badge">6종</span></div>
+  <div class="grid">
+    <div class="card-box" onclick="zoom(this)">
+      <img src="cards/latari/latari_realm.webp" alt="라타리 홈 렐름">
+      <div class="card-title">라타리 홈 렐름 (HP 20)</div>
+      <div class="card-file">cards/latari/latari_realm.webp</div>
+    </div>
+    <div class="card-box" onclick="zoom(this)">
+      <img src="cards/latari/latari_stronghold.webp" alt="라타리 요새">
+      <div class="card-title">라타리 요새 (영향력 2)</div>
+      <div class="card-file">cards/latari/latari_stronghold.webp</div>
+    </div>
+    <div class="card-box" onclick="zoom(this)">
+      <img src="cards/latari/unit_deepwood_archer.webp" alt="깊은숲 궁수">
+      <div class="card-title">깊은숲 궁수 (비용 1 / 공격 1)</div>
+      <div class="card-file">cards/latari/unit_deepwood_archer.webp</div>
+    </div>
+    <div class="card-box" onclick="zoom(this)">
+      <img src="cards/latari/unit_darnati_warrior.webp" alt="다르나티 전사">
+      <div class="card-title">다르나티 전사 (비용 2 / 공격 2)</div>
+      <div class="card-file">cards/latari/unit_darnati_warrior.webp</div>
+    </div>
+    <div class="card-box" onclick="zoom(this)">
+      <img src="cards/latari/unit_storm_sorceress.webp" alt="폭풍 마법사">
+      <div class="card-title">폭풍 마법사 (비용 3 / 공격 2)</div>
+      <div class="card-file">cards/latari/unit_storm_sorceress.webp</div>
+    </div>
+    <div class="card-box" onclick="zoom(this)">
+      <img src="cards/latari/unit_pegasus_rider.webp" alt="페가수스 기수">
+      <div class="card-title">페가수스 기수 (비용 5 / 공격 3)</div>
+      <div class="card-file">cards/latari/unit_pegasus_rider.webp</div>
+    </div>
+  </div>
+
+  <!-- 와이카의 불멸자들 -->
+  <div class="section-title"><span>💀 와이카의 불멸자들 (Waiqar the Undying - 언데드)</span> <span class="badge">6종</span></div>
+  <div class="grid">
+    <div class="card-box" onclick="zoom(this)">
+      <img src="cards/waiqar/waiqar_realm.webp" alt="와이카 홈 렐름">
+      <div class="card-title">와이카 홈 렐름 (HP 20)</div>
+      <div class="card-file">cards/waiqar/waiqar_realm.webp</div>
+    </div>
+    <div class="card-box" onclick="zoom(this)">
+      <img src="cards/waiqar/waiqar_stronghold.webp" alt="와이카 요새">
+      <div class="card-title">와이카 요새 (영향력 2)</div>
+      <div class="card-file">cards/waiqar/waiqar_stronghold.webp</div>
+    </div>
+    <div class="card-box" onclick="zoom(this)">
+      <img src="cards/waiqar/unit_reanimate.webp" alt="부활한 시체">
+      <div class="card-title">부활한 시체 (비용 1 / 공격 1)</div>
+      <div class="card-file">cards/waiqar/unit_reanimate.webp</div>
+    </div>
+    <div class="card-box" onclick="zoom(this)">
+      <img src="cards/waiqar/unit_skeleton_archer.webp" alt="해골 궁수">
+      <div class="card-title">해골 궁수 (비용 2 / 공격 2)</div>
+      <div class="card-file">cards/waiqar/unit_skeleton_archer.webp</div>
+    </div>
+    <div class="card-box" onclick="zoom(this)">
+      <img src="cards/waiqar/unit_necromancer.webp" alt="강령술사">
+      <div class="card-title">강령술사 (비용 3 / 공격 2)</div>
+      <div class="card-file">cards/waiqar/unit_necromancer.webp</div>
+    </div>
+    <div class="card-box" onclick="zoom(this)">
+      <img src="cards/waiqar/unit_vampire.webp" alt="흡혈귀">
+      <div class="card-title">흡혈귀 (비용 5 / 공격 4)</div>
+      <div class="card-file">cards/waiqar/unit_vampire.webp</div>
+    </div>
+  </div>
+
+  <!-- 우툭 일란 -->
+  <div class="section-title"><span>🔥 우툭 일란 (The Uthuk Y'llan - 악마/야만족)</span> <span class="badge">6종</span></div>
+  <div class="grid">
+    <div class="card-box" onclick="zoom(this)">
+      <img src="cards/uthuk/uthuk_realm.webp" alt="우툭 홈 렐름">
+      <div class="card-title">우툭 홈 렐름 (HP 20)</div>
+      <div class="card-file">cards/uthuk/uthuk_realm.webp</div>
+    </div>
+    <div class="card-box" onclick="zoom(this)">
+      <img src="cards/uthuk/uthuk_stronghold.webp" alt="우툭 요새">
+      <div class="card-title">우툭 요새 (영향력 2)</div>
+      <div class="card-file">cards/uthuk/uthuk_stronghold.webp</div>
+    </div>
+    <div class="card-box" onclick="zoom(this)">
+      <img src="cards/uthuk/unit_berserker.webp" alt="광전사">
+      <div class="card-title">광전사 (비용 1 / 공격 1)</div>
+      <div class="card-file">cards/uthuk/unit_berserker.webp</div>
+    </div>
+    <div class="card-box" onclick="zoom(this)">
+      <img src="cards/uthuk/unit_flesh_ripper.webp" alt="살점 찢는 자">
+      <div class="card-title">살점 찢는 자 (비용 2 / 공격 2)</div>
+      <div class="card-file">cards/uthuk/unit_flesh_ripper.webp</div>
+    </div>
+    <div class="card-box" onclick="zoom(this)">
+      <img src="cards/uthuk/unit_blood_warlock.webp" alt="피의 마법사">
+      <div class="card-title">피의 마법사 (비용 3 / 공격 3)</div>
+      <div class="card-file">cards/uthuk/unit_blood_warlock.webp</div>
+    </div>
+    <div class="card-box" onclick="zoom(this)">
+      <img src="cards/uthuk/unit_chaos_lord.webp" alt="혼돈의 군주">
+      <div class="card-title">혼돈의 군주 (비용 5 / 공격 4)</div>
+      <div class="card-file">cards/uthuk/unit_chaos_lord.webp</div>
+    </div>
+  </div>
+
+  <!-- 공용 마켓 -->
+  <div class="section-title"><span>💰 공용 마켓 (골드 및 중립 도시)</span> <span class="badge">7종</span></div>
+  <div class="grid">
+    <div class="card-box" onclick="zoom(this)">
+      <img src="cards/neutral/gold_1.webp" alt="1 골드">
+      <div class="card-title">1 골드</div>
+      <div class="card-file">cards/neutral/gold_1.webp</div>
+    </div>
+    <div class="card-box" onclick="zoom(this)">
+      <img src="cards/neutral/gold_2.webp" alt="2 골드">
+      <div class="card-title">2 골드</div>
+      <div class="card-file">cards/neutral/gold_2.webp</div>
+    </div>
+    <div class="card-box" onclick="zoom(this)">
+      <img src="cards/neutral/gold_3.webp" alt="3 골드">
+      <div class="card-title">3 골드</div>
+      <div class="card-file">cards/neutral/gold_3.webp</div>
+    </div>
+    <div class="card-box" onclick="zoom(this)">
+      <img src="cards/neutral/city_tamalir.webp" alt="타말리르">
+      <div class="card-title">타말리르 (방어 3)</div>
+      <div class="card-file">cards/neutral/city_tamalir.webp</div>
+    </div>
+    <div class="card-box" onclick="zoom(this)">
+      <img src="cards/neutral/city_riverwatch.webp" alt="리버워치">
+      <div class="card-title">리버워치 (방어 4)</div>
+      <div class="card-file">cards/neutral/city_riverwatch.webp</div>
+    </div>
+    <div class="card-box" onclick="zoom(this)">
+      <img src="cards/neutral/city_forge.webp" alt="포지">
+      <div class="card-title">포지 (방어 4)</div>
+      <div class="card-file">cards/neutral/city_forge.webp</div>
+    </div>
+    <div class="card-box" onclick="zoom(this)">
+      <img src="cards/neutral/city_dawnsmoor.webp" alt="던스무어">
+      <div class="card-title">던스무어 (방어 5)</div>
+      <div class="card-file">cards/neutral/city_dawnsmoor.webp</div>
+    </div>
+  </div>
+
+  <!-- 시나리오: 용군주의 부활 -->
+  <div class="section-title"><span>🐉 시나리오: 용군주의 부활 (Dragonlords)</span> <span class="badge">4종</span></div>
+  <div class="grid">
+    <div class="card-box" onclick="zoom(this)">
+      <img src="cards/scenario_dragonlords/boss_dragonlord.webp" alt="고대 드래곤 로드">
+      <div class="card-title">고대 드래곤 로드 (보스)</div>
+      <div class="card-file">cards/scenario_dragonlords/boss_dragonlord.webp</div>
+    </div>
+    <div class="card-box" onclick="zoom(this)">
+      <img src="cards/scenario_dragonlords/event_dragon_spawn.webp" alt="용들의 부화">
+      <div class="card-title">용들의 부화 (위협 1)</div>
+      <div class="card-file">cards/scenario_dragonlords/event_dragon_spawn.webp</div>
+    </div>
+    <div class="card-box" onclick="zoom(this)">
+      <img src="cards/scenario_dragonlords/event_drake_raiders.webp" alt="드레이크 약탈단">
+      <div class="card-title">드레이크 약탈단 (위협 2)</div>
+      <div class="card-file">cards/scenario_dragonlords/event_drake_raiders.webp</div>
+    </div>
+    <div class="card-box" onclick="zoom(this)">
+      <img src="cards/scenario_dragonlords/event_dragon_wrath.webp" alt="용의 분노">
+      <div class="card-title">용의 분노 (재앙 3)</div>
+      <div class="card-file">cards/scenario_dragonlords/event_dragon_wrath.webp</div>
+    </div>
+  </div>
+
+  <!-- Zoom Modal -->
+  <div class="modal" id="imageModal" onclick="closeZoom()">
+    <span class="modal-close">&times;</span>
+    <img id="modalImg" src="" alt="Zoomed Card">
+  </div>
+
+  <script>
+    function zoom(el) {
+      const img = el.querySelector('img');
+      if (!img) return;
+      document.getElementById('modalImg').src = img.src;
+      document.getElementById('imageModal').classList.add('active');
+    }
+    function closeZoom() {
+      document.getElementById('imageModal').classList.remove('active');
+    }
+  </script>
+</body>
+</html>

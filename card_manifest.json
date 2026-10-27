@@ -1,0 +1,910 @@
+{
+  "spec_version": "2.0.0",
+  "game_edition": "Rune Age Core + Oath and Anvil Expansion (본판 + 맹세와 모루 확장팩 완전체)",
+  "standard_asset_spec": {
+    "width": 500,
+    "height": 700,
+    "aspect_ratio": "5:7",
+    "format": "webp",
+    "border_radius_handling": "square_source (CSS handles border-radius)"
+  },
+  "card_backs": [
+    {
+      "id": "back_player_deck",
+      "name_ko": "플레이어 덱 공통 뒷면",
+      "name_en": "Player Deck Card Back",
+      "asset_path": "assets/cards/backs/back_player.webp",
+      "description": "6대 종족 유닛, 골드, 중립 도시, 용병 등 플레이어 덱에 들어가는 모든 카드 공통"
+    },
+    {
+      "id": "back_event_deck",
+      "name_ko": "시나리오 이벤트 덱 뒷면",
+      "name_en": "Scenario Event Card Back",
+      "asset_path": "assets/cards/backs/back_event.webp",
+      "description": "시나리오 이벤트 덱 카드 뒷면"
+    },
+    {
+      "id": "back_dragonlord",
+      "name_ko": "드래곤 로드 카드 뒷면",
+      "name_en": "Dragonlord Boss Card Back",
+      "asset_path": "assets/cards/backs/back_dragon.webp",
+      "description": "보스 드래곤 로드 카드 뒷면"
+    },
+    {
+      "id": "back_mercenary",
+      "name_ko": "용병 카드 뒷면",
+      "name_en": "Mercenary Card Back",
+      "asset_path": "assets/cards/backs/back_mercenary.webp",
+      "description": "확장팩 중립 용병 카드 뒷면"
+    }
+  ],
+  "factions": {
+    "daqan": {
+      "faction_id": "daqan",
+      "name_ko": "다칸 연합 (인간)",
+      "name_en": "The Daqan Lords",
+      "theme_color": "#1E40AF",
+      "realm": {
+        "id": "daqan_realm",
+        "name_ko": "다칸 연합 홈 렐름",
+        "name_en": "The Daqan Lords Home Realm",
+        "hp": 20,
+        "asset_front": "assets/cards/daqan/daqan_realm.webp"
+      },
+      "stronghold": {
+        "id": "daqan_stronghold",
+        "name_ko": "다칸 요새",
+        "name_en": "Daqan Stronghold",
+        "influence": 2,
+        "asset_front": "assets/cards/daqan/daqan_stronghold.webp"
+      },
+      "monument": {
+        "id": "daqan_monument",
+        "name_ko": "다칸 기념비",
+        "name_en": "Daqan Monument",
+        "asset_front": "assets/cards/daqan/daqan_monument.webp"
+      },
+      "units": [
+        {
+          "id": "unit_daqan_footman",
+          "name_ko": "보병",
+          "name_en": "Footman",
+          "cost": 1,
+          "cost_type": "gold",
+          "strength": 1,
+          "is_mythic": false,
+          "source": "core",
+          "asset_front": "assets/cards/daqan/unit_footman.webp"
+        },
+        {
+          "id": "unit_daqan_bowman",
+          "name_ko": "궁병",
+          "name_en": "Bowman",
+          "cost": 2,
+          "cost_type": "gold",
+          "strength": 2,
+          "is_mythic": false,
+          "source": "core",
+          "asset_front": "assets/cards/daqan/unit_bowman.webp"
+        },
+        {
+          "id": "unit_daqan_knight",
+          "name_ko": "기사",
+          "name_en": "Knight",
+          "cost": 3,
+          "cost_type": "gold",
+          "strength": 3,
+          "is_mythic": false,
+          "source": "core",
+          "asset_front": "assets/cards/daqan/unit_knight.webp"
+        },
+        {
+          "id": "unit_daqan_siege_engine",
+          "name_ko": "공성 병기",
+          "name_en": "Siege Engine",
+          "cost": 5,
+          "cost_type": "gold",
+          "strength": 4,
+          "is_mythic": false,
+          "source": "core",
+          "asset_front": "assets/cards/daqan/unit_siege_engine.webp"
+        },
+        {
+          "id": "unit_daqan_novice_wizard",
+          "name_ko": "수습 마법사",
+          "name_en": "Novice Wizard",
+          "cost": 2,
+          "cost_type": "gold",
+          "strength": 1,
+          "is_mythic": false,
+          "source": "expansion",
+          "asset_front": "assets/cards/daqan/unit_novice_wizard.webp"
+        },
+        {
+          "id": "unit_daqan_roc_warrior",
+          "name_ko": "로크 전사 (신화 유닛)",
+          "name_en": "Roc Warrior (Mythic)",
+          "cost": 5,
+          "cost_type": "gold",
+          "strength": 4,
+          "is_mythic": true,
+          "source": "expansion",
+          "asset_front": "assets/cards/daqan/unit_roc_warrior.webp"
+        }
+      ]
+    },
+    "latari": {
+      "faction_id": "latari",
+      "name_ko": "라타리 엘프 (엘프)",
+      "name_en": "The Latari Elves",
+      "theme_color": "#065F46",
+      "realm": {
+        "id": "latari_realm",
+        "name_ko": "라타리 엘프 홈 렐름",
+        "name_en": "The Latari Elves Home Realm",
+        "hp": 20,
+        "asset_front": "assets/cards/latari/latari_realm.webp"
+      },
+      "stronghold": {
+        "id": "latari_stronghold",
+        "name_ko": "라타리 요새",
+        "name_en": "Latari Stronghold",
+        "influence": 2,
+        "asset_front": "assets/cards/latari/latari_stronghold.webp"
+      },
+      "monument": {
+        "id": "latari_monument",
+        "name_ko": "라타리 기념비",
+        "name_en": "Latari Monument",
+        "asset_front": "assets/cards/latari/latari_monument.webp"
+      },
+      "units": [
+        {
+          "id": "unit_latari_deepwood_archer",
+          "name_ko": "깊은숲 궁수",
+          "name_en": "Deepwood Archer",
+          "cost": 1,
+          "cost_type": "gold",
+          "strength": 1,
+          "is_mythic": false,
+          "source": "core",
+          "asset_front": "assets/cards/latari/unit_deepwood_archer.webp"
+        },
+        {
+          "id": "unit_latari_darnati_warrior",
+          "name_ko": "다르나티 전사",
+          "name_en": "Darnati Warrior",
+          "cost": 2,
+          "cost_type": "gold",
+          "strength": 2,
+          "is_mythic": false,
+          "source": "core",
+          "asset_front": "assets/cards/latari/unit_darnati_warrior.webp"
+        },
+        {
+          "id": "unit_latari_storm_sorceress",
+          "name_ko": "폭풍 마법사",
+          "name_en": "Storm Sorceress",
+          "cost": 3,
+          "cost_type": "gold",
+          "strength": 2,
+          "is_mythic": false,
+          "source": "core",
+          "asset_front": "assets/cards/latari/unit_storm_sorceress.webp"
+        },
+        {
+          "id": "unit_latari_pegasus_rider",
+          "name_ko": "페가수스 기수",
+          "name_en": "Pegasus Rider",
+          "cost": 5,
+          "cost_type": "gold",
+          "strength": 3,
+          "is_mythic": false,
+          "source": "core",
+          "asset_front": "assets/cards/latari/unit_pegasus_rider.webp"
+        },
+        {
+          "id": "unit_latari_leonx_rider",
+          "name_ko": "레옹크스 기수",
+          "name_en": "Leonx Rider",
+          "cost": 3,
+          "cost_type": "gold",
+          "strength": 2,
+          "is_mythic": false,
+          "source": "expansion",
+          "asset_front": "assets/cards/latari/unit_leonx_rider.webp"
+        },
+        {
+          "id": "unit_latari_forest_guardian",
+          "name_ko": "숲의 수호자 (신화 유닛)",
+          "name_en": "Forest Guardian (Mythic)",
+          "cost": 6,
+          "cost_type": "gold",
+          "strength": 4,
+          "is_mythic": true,
+          "source": "expansion",
+          "asset_front": "assets/cards/latari/unit_forest_guardian.webp"
+        }
+      ]
+    },
+    "waiqar": {
+      "faction_id": "waiqar",
+      "name_ko": "와이카의 불멸자들 (언데드)",
+      "name_en": "Waiqar the Undying",
+      "theme_color": "#581C87",
+      "realm": {
+        "id": "waiqar_realm",
+        "name_ko": "와이카 홈 렐름",
+        "name_en": "Waiqar Home Realm",
+        "hp": 20,
+        "asset_front": "assets/cards/waiqar/waiqar_realm.webp"
+      },
+      "stronghold": {
+        "id": "waiqar_stronghold",
+        "name_ko": "와이카 요새",
+        "name_en": "Waiqar Stronghold",
+        "influence": 2,
+        "asset_front": "assets/cards/waiqar/waiqar_stronghold.webp"
+      },
+      "monument": {
+        "id": "waiqar_monument",
+        "name_ko": "와이카 기념비",
+        "name_en": "Waiqar Monument",
+        "asset_front": "assets/cards/waiqar/waiqar_monument.webp"
+      },
+      "units": [
+        {
+          "id": "unit_waiqar_reanimate",
+          "name_ko": "부활한 시체",
+          "name_en": "Reanimate",
+          "cost": 1,
+          "cost_type": "gold",
+          "strength": 1,
+          "is_mythic": false,
+          "source": "core",
+          "asset_front": "assets/cards/waiqar/unit_reanimate.webp"
+        },
+        {
+          "id": "unit_waiqar_skeleton_archer",
+          "name_ko": "해골 궁수",
+          "name_en": "Skeleton Archer",
+          "cost": 2,
+          "cost_type": "gold",
+          "strength": 2,
+          "is_mythic": false,
+          "source": "core",
+          "asset_front": "assets/cards/waiqar/unit_skeleton_archer.webp"
+        },
+        {
+          "id": "unit_waiqar_necromancer",
+          "name_ko": "강령술사",
+          "name_en": "Necromancer",
+          "cost": 3,
+          "cost_type": "gold",
+          "strength": 2,
+          "is_mythic": false,
+          "source": "core",
+          "asset_front": "assets/cards/waiqar/unit_necromancer.webp"
+        },
+        {
+          "id": "unit_waiqar_vampire",
+          "name_ko": "흡혈귀",
+          "name_en": "Vampire",
+          "cost": 5,
+          "cost_type": "gold",
+          "strength": 4,
+          "is_mythic": false,
+          "source": "core",
+          "asset_front": "assets/cards/waiqar/unit_vampire.webp"
+        },
+        {
+          "id": "unit_waiqar_dark_noble",
+          "name_ko": "암흑 귀족",
+          "name_en": "Dark Noble",
+          "cost": 3,
+          "cost_type": "gold",
+          "strength": 2,
+          "is_mythic": false,
+          "source": "expansion",
+          "asset_front": "assets/cards/waiqar/unit_dark_noble.webp"
+        },
+        {
+          "id": "unit_waiqar_barrow_wyrm",
+          "name_ko": "고분 웜 (신화 유닛)",
+          "name_en": "Barrow Wyrm (Mythic)",
+          "cost": 6,
+          "cost_type": "gold",
+          "strength": 5,
+          "is_mythic": true,
+          "source": "expansion",
+          "asset_front": "assets/cards/waiqar/unit_barrow_wyrm.webp"
+        }
+      ]
+    },
+    "uthuk": {
+      "faction_id": "uthuk",
+      "name_ko": "우툭 일란 (악마/야만족)",
+      "name_en": "The Uthuk Y'llan",
+      "theme_color": "#991B1B",
+      "realm": {
+        "id": "uthuk_realm",
+        "name_ko": "우툭 일란 홈 렐름",
+        "name_en": "The Uthuk Y'llan Home Realm",
+        "hp": 20,
+        "asset_front": "assets/cards/uthuk/uthuk_realm.webp"
+      },
+      "stronghold": {
+        "id": "uthuk_stronghold",
+        "name_ko": "우툭 요새",
+        "name_en": "Uthuk Stronghold",
+        "influence": 2,
+        "asset_front": "assets/cards/uthuk/uthuk_stronghold.webp"
+      },
+      "monument": {
+        "id": "uthuk_monument",
+        "name_ko": "우툭 기념비",
+        "name_en": "Uthuk Monument",
+        "asset_front": "assets/cards/uthuk/uthuk_monument.webp"
+      },
+      "units": [
+        {
+          "id": "unit_uthuk_berserker",
+          "name_ko": "광전사",
+          "name_en": "Berserker",
+          "cost": 1,
+          "cost_type": "gold",
+          "strength": 1,
+          "is_mythic": false,
+          "source": "core",
+          "asset_front": "assets/cards/uthuk/unit_berserker.webp"
+        },
+        {
+          "id": "unit_uthuk_flesh_ripper",
+          "name_ko": "살점 찢는 자",
+          "name_en": "Flesh Ripper",
+          "cost": 2,
+          "cost_type": "gold",
+          "strength": 2,
+          "is_mythic": false,
+          "source": "core",
+          "asset_front": "assets/cards/uthuk/unit_flesh_ripper.webp"
+        },
+        {
+          "id": "unit_uthuk_blood_warlock",
+          "name_ko": "피의 마법사",
+          "name_en": "Blood Warlock",
+          "cost": 3,
+          "cost_type": "gold",
+          "strength": 3,
+          "is_mythic": false,
+          "source": "core",
+          "asset_front": "assets/cards/uthuk/unit_blood_warlock.webp"
+        },
+        {
+          "id": "unit_uthuk_chaos_lord",
+          "name_ko": "혼돈의 군주",
+          "name_en": "Chaos Lord",
+          "cost": 5,
+          "cost_type": "gold",
+          "strength": 4,
+          "is_mythic": false,
+          "source": "core",
+          "asset_front": "assets/cards/uthuk/unit_chaos_lord.webp"
+        },
+        {
+          "id": "unit_uthuk_blood_sister",
+          "name_ko": "피의 자매",
+          "name_en": "Blood Sister",
+          "cost": 2,
+          "cost_type": "gold",
+          "strength": 2,
+          "is_mythic": false,
+          "source": "expansion",
+          "asset_front": "assets/cards/uthuk/unit_blood_sister.webp"
+        },
+        {
+          "id": "unit_uthuk_obscene",
+          "name_ko": "옵신 (신화 유닛)",
+          "name_en": "Obscene (Mythic)",
+          "cost": 5,
+          "cost_type": "gold",
+          "strength": 5,
+          "is_mythic": true,
+          "source": "expansion",
+          "asset_front": "assets/cards/uthuk/unit_obscene.webp"
+        }
+      ]
+    },
+    "dunwarr": {
+      "faction_id": "dunwarr",
+      "name_ko": "둔와르의 드워프 (드워프 - 확장팩 신규)",
+      "name_en": "The Dwarves of Dunwarr",
+      "theme_color": "#D97706",
+      "realm": {
+        "id": "dunwarr_realm",
+        "name_ko": "둔와르 홈 렐름",
+        "name_en": "Dunwarr Home Realm",
+        "hp": 20,
+        "asset_front": "assets/cards/dunwarr/dunwarr_realm.webp"
+      },
+      "stronghold": {
+        "id": "dunwarr_stronghold",
+        "name_ko": "둔와르 요새",
+        "name_en": "Dunwarr Stronghold",
+        "influence": 2,
+        "asset_front": "assets/cards/dunwarr/dunwarr_stronghold.webp"
+      },
+      "monument": {
+        "id": "dunwarr_monument",
+        "name_ko": "둔와르 기념비",
+        "name_en": "Dunwarr Monument",
+        "asset_front": "assets/cards/dunwarr/dunwarr_monument.webp"
+      },
+      "units": [
+        {
+          "id": "unit_dunwarr_sentinel",
+          "name_ko": "파수꾼",
+          "name_en": "Sentinel",
+          "cost": 1,
+          "cost_type": "gold",
+          "strength": 1,
+          "is_mythic": false,
+          "source": "expansion",
+          "asset_front": "assets/cards/dunwarr/unit_sentinel.webp"
+        },
+        {
+          "id": "unit_dunwarr_forgemaster",
+          "name_ko": "대장장이 (포지마스터)",
+          "name_en": "Forge Master",
+          "cost": 2,
+          "cost_type": "gold",
+          "strength": 2,
+          "is_mythic": false,
+          "source": "expansion",
+          "asset_front": "assets/cards/dunwarr/unit_forgemaster.webp"
+        },
+        {
+          "id": "unit_dunwarr_guardian",
+          "name_ko": "수호자",
+          "name_en": "Guardian",
+          "cost": 3,
+          "cost_type": "gold",
+          "strength": 3,
+          "is_mythic": false,
+          "source": "expansion",
+          "asset_front": "assets/cards/dunwarr/unit_guardian.webp"
+        },
+        {
+          "id": "unit_dunwarr_demolitionist",
+          "name_ko": "폭파전문가",
+          "name_en": "Demolitionist",
+          "cost": 4,
+          "cost_type": "gold",
+          "strength": 3,
+          "is_mythic": false,
+          "source": "expansion",
+          "asset_front": "assets/cards/dunwarr/unit_demolitionist.webp"
+        },
+        {
+          "id": "unit_dunwarr_battering_ram",
+          "name_ko": "공성 망치",
+          "name_en": "Battering Ram",
+          "cost": 4,
+          "cost_type": "gold",
+          "strength": 4,
+          "is_mythic": false,
+          "source": "expansion",
+          "asset_front": "assets/cards/dunwarr/unit_battering_ram.webp"
+        },
+        {
+          "id": "unit_dunwarr_ironclad_golem",
+          "name_ko": "철갑 골렘 (신화 유닛)",
+          "name_en": "Ironclad Golem (Mythic)",
+          "cost": 6,
+          "cost_type": "gold",
+          "strength": 5,
+          "is_mythic": true,
+          "source": "expansion",
+          "asset_front": "assets/cards/dunwarr/unit_ironclad_golem.webp"
+        }
+      ]
+    },
+    "orcs": {
+      "faction_id": "orcs",
+      "name_ko": "부서진 평원의 오크 (오크 - 확장팩 신규)",
+      "name_en": "The Orcs of the Broken Plains",
+      "theme_color": "#15803D",
+      "realm": {
+        "id": "orc_realm",
+        "name_ko": "오크 홈 렐름",
+        "name_en": "Orc Home Realm",
+        "hp": 20,
+        "asset_front": "assets/cards/orcs/orc_realm.webp"
+      },
+      "stronghold": {
+        "id": "orc_stronghold",
+        "name_ko": "오크 요새",
+        "name_en": "Orc Stronghold",
+        "influence": 2,
+        "asset_front": "assets/cards/orcs/orc_stronghold.webp"
+      },
+      "monument": {
+        "id": "orc_monument",
+        "name_ko": "오크 기념비",
+        "name_en": "Orc Monument",
+        "asset_front": "assets/cards/orcs/orc_monument.webp"
+      },
+      "units": [
+        {
+          "id": "unit_orc_raider",
+          "name_ko": "부족 약탈자",
+          "name_en": "Raider",
+          "cost": 1,
+          "cost_type": "gold",
+          "strength": 1,
+          "is_mythic": false,
+          "source": "expansion",
+          "asset_front": "assets/cards/orcs/unit_raider.webp"
+        },
+        {
+          "id": "unit_orc_wolf_rider",
+          "name_ko": "늑대 기수",
+          "name_en": "Wolf Rider",
+          "cost": 2,
+          "cost_type": "gold",
+          "strength": 2,
+          "is_mythic": false,
+          "source": "expansion",
+          "asset_front": "assets/cards/orcs/unit_wolf_rider.webp"
+        },
+        {
+          "id": "unit_orc_brawler",
+          "name_ko": "싸움꾼 (브롤러)",
+          "name_en": "Brawler",
+          "cost": 3,
+          "cost_type": "gold",
+          "strength": 3,
+          "is_mythic": false,
+          "source": "expansion",
+          "asset_front": "assets/cards/orcs/unit_brawler.webp"
+        },
+        {
+          "id": "unit_orc_war_shaman",
+          "name_ko": "전쟁 주술사",
+          "name_en": "War Shaman",
+          "cost": 3,
+          "cost_type": "gold",
+          "strength": 2,
+          "is_mythic": false,
+          "source": "expansion",
+          "asset_front": "assets/cards/orcs/unit_war_shaman.webp"
+        },
+        {
+          "id": "unit_orc_chieftain",
+          "name_ko": "부족 족장",
+          "name_en": "Chieftain",
+          "cost": 5,
+          "cost_type": "gold",
+          "strength": 4,
+          "is_mythic": false,
+          "source": "expansion",
+          "asset_front": "assets/cards/orcs/unit_chieftain.webp"
+        },
+        {
+          "id": "unit_orc_behemoth",
+          "name_ko": "베히모스 (신화 유닛)",
+          "name_en": "Behemoth (Mythic)",
+          "cost": 6,
+          "cost_type": "gold",
+          "strength": 5,
+          "is_mythic": true,
+          "source": "expansion",
+          "asset_front": "assets/cards/orcs/unit_behemoth.webp"
+        }
+      ]
+    }
+  },
+  "mercenaries": [
+    {
+      "id": "merc_battle_cry",
+      "category": 1,
+      "name_ko": "전투 함성",
+      "name_en": "Battle Cry",
+      "cost": 3,
+      "cost_type": "influence",
+      "asset_front": "assets/cards/mercenaries/merc_battle_cry.webp"
+    },
+    {
+      "id": "merc_forced_march",
+      "category": 1,
+      "name_ko": "강제 행군",
+      "name_en": "Forced March",
+      "cost": 2,
+      "cost_type": "influence",
+      "asset_front": "assets/cards/mercenaries/merc_forced_march.webp"
+    },
+    {
+      "id": "merc_scout",
+      "category": 1,
+      "name_ko": "정찰병",
+      "name_en": "Scout",
+      "cost": 2,
+      "cost_type": "influence",
+      "strength": 1,
+      "asset_front": "assets/cards/mercenaries/merc_scout.webp"
+    },
+    {
+      "id": "merc_alchemist",
+      "category": 1,
+      "name_ko": "연금술사",
+      "name_en": "Alchemist",
+      "cost": 3,
+      "cost_type": "influence",
+      "asset_front": "assets/cards/mercenaries/merc_alchemist.webp"
+    },
+    {
+      "id": "merc_bounty_hunter",
+      "category": 1,
+      "name_ko": "현상금 사냥꾼",
+      "name_en": "Bounty Hunter",
+      "cost": 4,
+      "cost_type": "influence",
+      "strength": 2,
+      "asset_front": "assets/cards/mercenaries/merc_bounty_hunter.webp"
+    },
+    {
+      "id": "merc_siege_tower",
+      "category": 2,
+      "name_ko": "공성탑 (Siege)",
+      "name_en": "Siege Tower",
+      "cost": 5,
+      "cost_type": "influence",
+      "strength": 4,
+      "is_siege": true,
+      "asset_front": "assets/cards/mercenaries/merc_siege_tower.webp"
+    },
+    {
+      "id": "merc_war_catapult",
+      "category": 2,
+      "name_ko": "전쟁 투석기 (Siege)",
+      "name_en": "War Catapult",
+      "cost": 4,
+      "cost_type": "influence",
+      "strength": 3,
+      "is_siege": true,
+      "asset_front": "assets/cards/mercenaries/merc_war_catapult.webp"
+    },
+    {
+      "id": "merc_dragon_slayer",
+      "category": 2,
+      "name_ko": "용 사냥꾼",
+      "name_en": "Dragon Slayer",
+      "cost": 5,
+      "cost_type": "influence",
+      "strength": 4,
+      "asset_front": "assets/cards/mercenaries/merc_dragon_slayer.webp"
+    },
+    {
+      "id": "merc_shadow_assassin",
+      "category": 2,
+      "name_ko": "그림자 암살자",
+      "name_en": "Shadow Assassin",
+      "cost": 4,
+      "cost_type": "influence",
+      "strength": 3,
+      "asset_front": "assets/cards/mercenaries/merc_shadow_assassin.webp"
+    },
+    {
+      "id": "merc_captain",
+      "category": 2,
+      "name_ko": "용병대장",
+      "name_en": "Mercenary Captain",
+      "cost": 6,
+      "cost_type": "influence",
+      "strength": 5,
+      "asset_front": "assets/cards/mercenaries/merc_captain.webp"
+    }
+  ],
+  "neutral_market": {
+    "gold": [
+      {
+        "id": "gold_1",
+        "name_ko": "1 골드",
+        "name_en": "1 Gold",
+        "gold_value": 1,
+        "cost": 0,
+        "asset_front": "assets/cards/neutral/gold_1.webp"
+      },
+      {
+        "id": "gold_2",
+        "name_ko": "2 골드",
+        "name_en": "2 Gold",
+        "gold_value": 2,
+        "cost": 3,
+        "asset_front": "assets/cards/neutral/gold_2.webp"
+      },
+      {
+        "id": "gold_3",
+        "name_ko": "3 골드",
+        "name_en": "3 Gold",
+        "gold_value": 3,
+        "cost": 6,
+        "asset_front": "assets/cards/neutral/gold_3.webp"
+      }
+    ],
+    "cities_and_landmarks": [
+      {
+        "id": "city_tamalir",
+        "name_ko": "타말리르 (Tamalir)",
+        "name_en": "Tamalir",
+        "type": "city",
+        "defense_strength": 3,
+        "reward_influence": 2,
+        "asset_front": "assets/cards/neutral/city_tamalir.webp"
+      },
+      {
+        "id": "city_riverwatch",
+        "name_ko": "리버워치 (Riverwatch)",
+        "name_en": "Riverwatch",
+        "type": "city",
+        "defense_strength": 4,
+        "reward_influence": 3,
+        "asset_front": "assets/cards/neutral/city_riverwatch.webp"
+      },
+      {
+        "id": "city_forge",
+        "name_ko": "포지 (The Forge)",
+        "name_en": "The Forge",
+        "type": "city",
+        "defense_strength": 4,
+        "reward_influence": 3,
+        "asset_front": "assets/cards/neutral/city_forge.webp"
+      },
+      {
+        "id": "city_dawnsmoor",
+        "name_ko": "던스무어 (Dawnsmoor)",
+        "name_en": "Dawnsmoor",
+        "type": "city",
+        "defense_strength": 5,
+        "reward_influence": 4,
+        "asset_front": "assets/cards/neutral/city_dawnsmoor.webp"
+      },
+      {
+        "id": "landmark_great_library",
+        "name_ko": "대도서관 (Great Library - 랜드마크)",
+        "name_en": "The Great Library",
+        "type": "landmark",
+        "defense_strength": 5,
+        "reward_influence": 4,
+        "source": "expansion",
+        "asset_front": "assets/cards/neutral/landmark_great_library.webp"
+      },
+      {
+        "id": "landmark_sunken_temple",
+        "name_ko": "가라앉은 사원 (Sunken Temple - 랜드마크)",
+        "name_en": "Sunken Temple",
+        "type": "landmark",
+        "defense_strength": 6,
+        "reward_influence": 5,
+        "source": "expansion",
+        "asset_front": "assets/cards/neutral/landmark_sunken_temple.webp"
+      }
+    ]
+  },
+  "scenarios": {
+    "dragonlords": {
+      "id": "scenario_dragonlords",
+      "name_ko": "용군주의 부활",
+      "name_en": "Resurgence of the Dragonlords",
+      "type": "cooperative",
+      "bosses": [
+        {
+          "id": "boss_dragonlord",
+          "name_ko": "고대 드래곤 로드",
+          "name_en": "The Ancient Dragonlord",
+          "strength": 8,
+          "hp": 12,
+          "asset_front": "assets/cards/scenario_dragonlords/boss_dragonlord.webp"
+        }
+      ],
+      "events": [
+        {
+          "id": "event_dragon_spawn",
+          "name_ko": "용들의 부화",
+          "name_en": "Dragon Spawn",
+          "tier": 1,
+          "asset_front": "assets/cards/scenario_dragonlords/event_dragon_spawn.webp"
+        },
+        {
+          "id": "event_drake_raiders",
+          "name_ko": "드레이크 약탈단",
+          "name_en": "Drake Raiders",
+          "tier": 2,
+          "asset_front": "assets/cards/scenario_dragonlords/event_drake_raiders.webp"
+        },
+        {
+          "id": "event_dragon_wrath",
+          "name_ko": "용의 분노",
+          "name_en": "Dragon's Wrath",
+          "tier": 3,
+          "asset_front": "assets/cards/scenario_dragonlords/event_dragon_wrath.webp"
+        },
+        {
+          "id": "event_variant_dragonlords_1",
+          "name_ko": "용군주 변형 이벤트 1 (갈색 뒷면)",
+          "name_en": "Dragonlord Variant Event 1",
+          "tier": 1,
+          "source": "expansion",
+          "asset_front": "assets/cards/scenario_dragonlords/event_variant_1.webp"
+        },
+        {
+          "id": "event_variant_dragonlords_2",
+          "name_ko": "용군주 변형 이벤트 2 (갈색 뒷면)",
+          "name_en": "Dragonlord Variant Event 2",
+          "tier": 1,
+          "source": "expansion",
+          "asset_front": "assets/cards/scenario_dragonlords/event_variant_2.webp"
+        }
+      ]
+    },
+    "monument": {
+      "id": "scenario_monument",
+      "name_ko": "기념비 (The Monument)",
+      "name_en": "The Monument",
+      "type": "competitive_race"
+    },
+    "runewars": {
+      "id": "scenario_runewars",
+      "name_ko": "룬 전쟁 (Runewars)",
+      "name_en": "Runewars",
+      "type": "competitive_elimination"
+    },
+    "cataclysm": {
+      "id": "scenario_cataclysm",
+      "name_ko": "대격변 (The Cataclysm)",
+      "name_en": "The Cataclysm",
+      "type": "semi_cooperative_survival"
+    },
+    "overlord": {
+      "id": "scenario_overlord",
+      "name_ko": "군주의 부상 (Ascent of the Overlord - 확장 신규)",
+      "name_en": "Ascent of the Overlord",
+      "type": "one_vs_many",
+      "source": "expansion"
+    },
+    "quest_for_power": {
+      "id": "scenario_quest_for_power",
+      "name_ko": "힘을 향한 탐색 (The Quest for Power - 확장 신규)",
+      "name_en": "The Quest for Power",
+      "type": "landmark_control",
+      "source": "expansion"
+    }
+  },
+  "ui_tokens": [
+    {
+      "id": "token_gold",
+      "name_ko": "골드 코인 아이콘",
+      "asset_path": "assets/icons/token_gold.svg"
+    },
+    {
+      "id": "token_influence",
+      "name_ko": "영향력 룬 아이콘",
+      "asset_path": "assets/icons/token_influence.svg"
+    },
+    {
+      "id": "token_strength",
+      "name_ko": "전투력 검 아이콘",
+      "asset_path": "assets/icons/token_strength.svg"
+    },
+    {
+      "id": "token_wound",
+      "name_ko": "상처/데미지 하트 아이콘",
+      "asset_path": "assets/icons/token_wound.svg"
+    },
+    {
+      "id": "token_mythic_shield",
+      "name_ko": "신화 유닛 황금 방패 마크",
+      "asset_path": "assets/icons/token_mythic_shield.svg"
+    }
+  ]
+}
