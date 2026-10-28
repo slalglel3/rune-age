@@ -7,6 +7,16 @@
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover"
     />
     <title>룬 에이지 (Rune Age) - 디지털 에디션</title>
+    <script>
+      // When accessed on static servers (port 5175 or GitHub Pages) and NOT Vite dev server (port 5173),
+      // redirect automatically to the card inspector tool.
+      if (window.location.port !== '5173') {
+        const p = window.location.pathname;
+        if (p === '/' || p.endsWith('/') || p.endsWith('/index.html')) {
+          window.location.replace('inspect.html');
+        }
+      }
+    </script>
   </head>
   <body class="bg-slate-950 text-white overflow-hidden">
     <div id="root"></div>
