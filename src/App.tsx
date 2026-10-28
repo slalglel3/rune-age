@@ -1,36 +1,78 @@
-import React, { useReducer, useState } from 'react';
+import React, { useReducer, useState, useEffect } from 'react';
 import { gameReducer, initGame } from './engine/gameReducer';
 import { FactionId } from './types/game';
+import {
+  LayoutConfig,
+  LayoutKey,
+  ElementLayout,
+  loadSavedLayout,
+  saveLayoutToStorage,
+  saveLayoutToServer,
+  fetchServerLayout,
+  DEFAULT_LAYOUT
+} from './types/layout';
 import { FACTION_INFO, FACTION_UNITS, ALL_CARDS } from './engine/cardDatabase';
 import { PlaymatField } from './components/PlaymatField';
 import { FanHand } from './components/FanHand';
 import { DynamicActionButtons } from './components/DynamicActionButtons';
 import { CardZoomPreview } from './components/CardZoomPreview';
-import { MarketBoard } from './components/MarketBoard';
-import { BarracksBoard } from './components/BarracksBoard';
 import { GameLogModal } from './components/GameLogModal';
+import { LayoutEditorToolbar } from './components/LayoutEditorToolbar';
+import { ResizableDraggableWrapper } from './components/ResizableDraggableWrapper';
 import { CardView } from './components/CardView';
-import { Trophy, Skull, RotateCcw, Sparkles, ScrollText, X } from 'lucide-react';
+import { Trophy, Skull, RotateCcw, Sparkles, ScrollText, Sliders } from 'lucide-react';
 
 export function App() {
   const [selectedFaction, setSelectedFaction] = useState<FactionId | null>(null);
   const [state, dispatch] = useReducer(gameReducer, initGame('daqan'));
 
-  // UI 상태 관리
-  const [isMarketOpen, setIsMarketOpen] = useState(false);
-  const [isBarracksOpen, setIsBarracksOpen] = useState(false);
+  // 인터랙티브 레이아웃 편집 상태
+  const [isEditMode, setIsEditMode] = useState(false);
+  const [layoutConfig, setLayoutConfig] = useState<LayoutConfig>(() => loadSavedLayout());
+
+  // 모달 및 호버 줌 상태
   const [isLogOpen, setIsLogOpen] = useState(false);
   const [hoveredCardId, setHoveredCardId] = useState<string | null>(null);
+
+  // 마운트 시: 서버에 저장된 userLayout.json이 있으면 불러오고, 없으면 브라우저 상태를 서버에 자동 백업
+  useEffect(() => {
+    fetchServerLayout().then((serverLayout) => {
+      if (serverLayout) {
+        setLayoutConfig(serverLayout);
+      } else {
+        saveLayoutToServer(layoutConfig).catch(() => {});
+      }
+    });
+  }, []);
+
+  const handleUpdateElementLayout = (key: LayoutKey, newLayout: ElementLayout) => {
+    const updated = {
+      ...layoutConfig,
+      elements: {
+        ...layoutConfig.elements,
+        [key]: newLayout
+      }
+    };
+    setLayoutConfig(updated);
+    saveLayoutToStorage(updated);
+  };
+
+  const handleUpdateTilt = (angle: number) => {
+    const updated = { ...layoutConfig, tiltAngle: angle };
+    setLayoutConfig(updated);
+    saveLayoutToStorage(updated);
+  };
+
+  const handleResetLayout = () => {
+    setLayoutConfig(DEFAULT_LAYOUT);
+    saveLayoutToStorage(DEFAULT_LAYOUT);
+  };
 
   // 종족 선택 후 게임 시작
   const handleStartGame = (faction: FactionId) => {
     setSelectedFaction(faction);
     dispatch({ type: 'START_GAME', faction });
   };
-
-  const hasReadyAllies = state.fieldAllies.some(a => a.canAttack && !a.hasAttacked);
-  const hasUnitsInHand = state.hand.some(c => ALL_CARDS[c.definitionId]?.type === 'unit' && c.definitionId !== 'unit_latari_storm_sorceress');
-  const hasGoldInHand = state.hand.some(c => ALL_CARDS[c.definitionId]?.type === 'gold');
 
   // 종족 선택 화면
   if (!selectedFaction) {
@@ -42,7 +84,7 @@ export function App() {
               <Sparkles size={16} />
               <span>Fantasy Flight Games • Digital Edition</span>
             </div>
-            <h1 className="text-4xl sm:text-6xl font-black text-white tracking-tight drop-shadow-lg">
+            <h1 className="text-4xl sm:text-6xl font-black text-white tracking-tight drop-shadow-2xl">
               룬 에이지 <span className="text-amber-500">(Rune Age)</span>
             </h1>
             <p className="text-slate-400 text-sm mt-2">
@@ -89,91 +131,128 @@ export function App() {
   return (
     <div className="w-full h-full flex flex-col bg-slate-950 text-white select-none overflow-hidden relative font-sans">
       {/* ========================================================
-          1. 최상단: 섀도우 에라 스타일의 페이즈 배너 & 상태바
+          상단 레이아웃 편집기 툴바 (isEditMode일 때 상단 고정 노출)
           ======================================================== */}
-      <header className="bg-slate-950/95 border-b border-slate-800 px-4 py-2 flex items-center justify-between shrink-0 shadow-xl z-30">
-        {/* 좌측: T1 - Action 페이즈 배너 */}
+      {isEditMode && (
+        <LayoutEditorToolbar
+          config={layoutConfig}
+          onUpdateTilt={handleUpdateTilt}
+          onReset={handleResetLayout}
+          onClose={() => setIsEditMode(false)}
+          onSaveServer={() => saveLayoutToServer(layoutConfig)}
+          onImportLayout={(newCfg) => {
+            setLayoutConfig(newCfg);
+            saveLayoutToStorage(newCfg);
+          }}
+        />
+      )}
+
+      {/* ========================================================
+          1. 최상단: 페이즈 배너 & 상태바 (HUD)
+          ======================================================== */}
+      <header className="bg-slate-950/95 border-b border-slate-800/80 px-4 py-2 flex items-center justify-between shrink-0 shadow-2xl z-40">
         <div className="flex items-center gap-3">
           <div
-            className="w-8 h-8 rounded-xl flex items-center justify-center font-black text-xs text-white shadow"
+            className="w-8 h-8 rounded-xl flex items-center justify-center font-black text-xs text-white shadow-lg"
             style={{ backgroundColor: factionInfo.color }}
           >
             {factionInfo.name_ko.substring(0, 2)}
           </div>
           <div className="flex items-center gap-2">
-            <span className="font-black text-sm sm:text-base text-amber-400 bg-amber-950/60 border border-amber-900/80 px-2.5 py-0.5 rounded-lg shadow">
+            <span className="font-black text-sm sm:text-base text-amber-400 bg-amber-950/80 border border-amber-900 px-3 py-0.5 rounded-lg shadow-inner tracking-wider">
               {state.phaseName}
             </span>
-            <span className="text-xs text-slate-300 font-bold hidden sm:inline">
+            <span className="text-xs text-slate-400 font-bold hidden sm:inline">
               {factionInfo.name_ko} 지휘관
             </span>
           </div>
         </div>
 
-        {/* 중앙: 시나리오 목표 */}
-        <div className="hidden md:flex items-center gap-1.5 text-xs text-slate-400 font-semibold">
-          <span>목표:</span>
-          <span className="text-red-400 font-bold">고대 드래곤 로드 토벌</span>
+        <div className="hidden md:flex items-center gap-2 text-xs text-slate-400 font-semibold bg-slate-900/80 px-3 py-1 rounded-full border border-slate-800">
+          <span className="text-red-400 font-bold">목표: 고대 드래곤 로드 토벌</span>
           <span className="text-slate-600">|</span>
-          <span className="text-emerald-400">수도 방어</span>
+          <span className="text-emerald-400 font-bold">수도 홈 렐름 사수</span>
         </div>
 
-        {/* 우측: 로그 버튼 */}
         <div className="flex items-center gap-2">
+          {/* UI 레이아웃 편집기 토글 버튼 */}
+          <button
+            onClick={() => setIsEditMode(!isEditMode)}
+            className={`flex items-center gap-1.5 text-xs font-bold px-3 py-1.5 rounded-xl border shadow transition ${
+              isEditMode
+                ? 'bg-cyan-600 border-cyan-400 text-white animate-pulse'
+                : 'bg-slate-900 hover:bg-slate-800 text-cyan-300 border-cyan-700/60'
+            }`}
+            title="마우스로 화면 요소를 자유롭게 드래그 및 크기 조절"
+          >
+            <Sliders size={15} />
+            <span>{isEditMode ? '편집 모드 ON' : '📐 UI 배치 편집'}</span>
+          </button>
+
           <button
             onClick={() => setIsLogOpen(true)}
-            className="flex items-center gap-1.5 text-xs bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold px-3 py-1.5 rounded-xl border border-slate-700 shadow transition"
+            className="flex items-center gap-1.5 text-xs bg-slate-900 hover:bg-slate-800 text-slate-200 font-bold px-3 py-1.5 rounded-xl border border-slate-700 shadow transition"
           >
             <ScrollText size={15} className="text-amber-400" />
-            <span>전투 로그</span>
+            <span>로그</span>
           </button>
         </div>
       </header>
 
       {/* ========================================================
-          2. 중앙 메인: 상/하단 대칭형 플레이 매트 전장
+          2. 중앙 메인: 3D 원근 틸트 테이블탑 전장 (Perspective Field)
           ======================================================== */}
       <main className="flex-1 flex flex-col min-h-0 overflow-hidden relative">
         <PlaymatField
           state={state}
+          layoutConfig={layoutConfig}
+          isEditMode={isEditMode}
+          onUpdateElementLayout={handleUpdateElementLayout}
           onAttackTarget={(targetType, targetId) =>
             dispatch({ type: 'ATTACK_TARGET', targetType, targetId })
           }
-          onSelectAlly={(id) => {
-            // 단일 유닛 선택 인터랙션 (추후 다대다 타깃팅 확장 가능)
-          }}
+          onSelectAlly={() => {}}
           onCardHover={(cardId) => setHoveredCardId(cardId)}
+          onBuyUnit={(unitId) => dispatch({ type: 'BUY_BARRACKS_UNIT', unitId })}
+          onBuyMarketCard={(cardId) => dispatch({ type: 'BUY_MARKET_CARD', cardId })}
         />
       </main>
 
       {/* ========================================================
-          3. 최하단: 부채꼴 손패 (Fan-out Hand) & 우측 동적 액션 버튼
+          3. 최하단: HUD 전면 레이어 (부채꼴 손패 & 단일 턴 종료 버튼)
           ======================================================== */}
-      <footer className="bg-gradient-to-t from-slate-950 via-slate-950/90 to-transparent pt-2 pb-3 px-4 flex items-end justify-between shrink-0 relative z-30">
-        {/* 좌측 여백 (카드 줌 프리뷰가 뜰 공간 확보) */}
+      <footer className="bg-gradient-to-t from-slate-950 via-slate-950/95 to-transparent pt-1 pb-3 px-4 flex items-end justify-between shrink-0 relative z-40">
         <div className="w-24 sm:w-48 shrink-0 pointer-events-none" />
 
-        {/* 중앙: 부채꼴 손패 */}
-        <div className="flex-1 flex justify-center">
-          <FanHand
-            hand={state.hand}
-            onPlayCard={(instanceId) => dispatch({ type: 'PLAY_HAND_CARD', instanceId })}
-            onHoverCard={(cardId) => setHoveredCardId(cardId)}
-          />
+        {/* 중앙: 부채꼴 손패 (드래그/리사이즈 지원) */}
+        <div className="flex-1 flex justify-center overflow-visible">
+          <ResizableDraggableWrapper
+            id="fanHand"
+            label="부채꼴 손패"
+            layout={layoutConfig.elements.fanHand}
+            isEditMode={isEditMode}
+            onChange={(nl) => handleUpdateElementLayout('fanHand', nl)}
+          >
+            <FanHand
+              hand={state.hand}
+              onPlayCard={(instanceId) => dispatch({ type: 'PLAY_HAND_CARD', instanceId })}
+              onHoverCard={(cardId) => setHoveredCardId(cardId)}
+            />
+          </ResizableDraggableWrapper>
         </div>
 
-        {/* 우측: 섀도우 에라 스타일 ALL ATTACK / END TURN 액션 버튼군 */}
-        <DynamicActionButtons
-          hasReadyAllies={hasReadyAllies}
-          hasUnitsInHand={hasUnitsInHand}
-          hasGoldInHand={hasGoldInHand}
-          onAllAttack={() => dispatch({ type: 'ALL_ATTACK' })}
-          onDeployAllUnits={() => dispatch({ type: 'DEPLOY_ALL_UNITS' })}
-          onPlayAllGold={() => dispatch({ type: 'PLAY_ALL_GOLD' })}
-          onEndTurn={() => dispatch({ type: 'END_TURN' })}
-          onToggleMarket={() => setIsMarketOpen(true)}
-          onToggleBarracks={() => setIsBarracksOpen(true)}
-        />
+        {/* 우측: 턴 종료 단일 액션 버튼 (드래그/리사이즈 지원) */}
+        <ResizableDraggableWrapper
+          id="actionButtons"
+          label="턴 종료 버튼"
+          layout={layoutConfig.elements.actionButtons}
+          isEditMode={isEditMode}
+          onChange={(nl) => handleUpdateElementLayout('actionButtons', nl)}
+        >
+          <DynamicActionButtons
+            onEndTurn={() => dispatch({ type: 'END_TURN' })}
+          />
+        </ResizableDraggableWrapper>
       </footer>
 
       {/* ========================================================
@@ -182,62 +261,7 @@ export function App() {
       <CardZoomPreview cardId={hoveredCardId} />
 
       {/* ========================================================
-          5. 공용 상점 모달 (골드 1/2/3 및 중립 도시 구매)
-          ======================================================== */}
-      {isMarketOpen && (
-        <div className="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-3">
-          <div className="bg-slate-900 border border-slate-700 rounded-3xl max-w-xl w-full max-h-[85vh] overflow-y-auto p-5 shadow-2xl flex flex-col gap-4">
-            <div className="flex justify-between items-center pb-2 border-b border-slate-800">
-              <span className="font-extrabold text-white text-base">🛒 공용 마켓 (카드 구매)</span>
-              <button
-                onClick={() => setIsMarketOpen(false)}
-                className="p-1 hover:bg-slate-800 rounded-lg text-slate-400 hover:text-white"
-              >
-                <X size={20} />
-              </button>
-            </div>
-            <MarketBoard
-              goldPool={state.goldPool}
-              marketStock={state.marketGoldStock}
-              marketCities={state.marketCities}
-              onBuyCard={(cardId) => dispatch({ type: 'BUY_MARKET_CARD', cardId })}
-              onAttackCity={(cityId) => {
-                setIsMarketOpen(false);
-                dispatch({ type: 'ATTACK_TARGET', targetType: 'city', targetId: cityId });
-              }}
-              isCombatPhase={false}
-            />
-          </div>
-        </div>
-      )}
-
-      {/* ========================================================
-          6. 종족 병영 모달 (4개 종족 유닛 징집)
-          ======================================================== */}
-      {isBarracksOpen && (
-        <div className="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-3">
-          <div className="bg-slate-900 border border-slate-700 rounded-3xl max-w-xl w-full max-h-[85vh] overflow-y-auto p-5 shadow-2xl flex flex-col gap-4">
-            <div className="flex justify-between items-center pb-2 border-b border-slate-800">
-              <span className="font-extrabold text-white text-base">🛡️ {factionInfo.name_ko} 병영 (군대 징집)</span>
-              <button
-                onClick={() => setIsBarracksOpen(false)}
-                className="p-1 hover:bg-slate-800 rounded-lg text-slate-400 hover:text-white"
-              >
-                <X size={20} />
-              </button>
-            </div>
-            <BarracksBoard
-              faction={state.playerFaction}
-              goldPool={state.goldPool}
-              barracksStock={state.barracksStock}
-              onBuyUnit={(unitId) => dispatch({ type: 'BUY_BARRACKS_UNIT', unitId })}
-            />
-          </div>
-        </div>
-      )}
-
-      {/* ========================================================
-          7. 실시간 게임 로그 모달
+          5. 실시간 게임 로그 모달
           ======================================================== */}
       <GameLogModal
         logs={state.logs}
@@ -246,7 +270,7 @@ export function App() {
       />
 
       {/* ========================================================
-          8. 승리 / 패배 결과 화면
+          6. 승리 / 패배 결과 화면
           ======================================================== */}
       {(state.phase === 'VICTORY' || state.phase === 'DEFEAT') && (
         <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4">

@@ -17,18 +17,18 @@ export const FanHand: React.FC<FanHandProps> = ({
   const centerIndex = (hand.length - 1) / 2;
 
   return (
-    <div className="relative flex justify-center items-end h-36 sm:h-44 px-4 overflow-visible">
+    <div className="relative flex justify-center items-end h-32 sm:h-38 px-4 overflow-visible pointer-events-auto">
       {hand.length === 0 ? (
-        <div className="text-slate-500 text-xs italic mb-8">
+        <div className="text-slate-500 text-xs italic mb-6">
           손패가 비었습니다. 턴을 종료하면 5장을 새로 드로우합니다.
         </div>
       ) : (
-        <div className="flex justify-center items-end relative w-full max-w-2xl">
+        <div className="flex justify-center items-end relative w-full max-w-xl">
           {hand.map((card, idx) => {
             const def = ALL_CARDS[card.definitionId];
             const offset = idx - centerIndex;
-            const rotation = offset * 4.5; // 부채꼴 회전 각도
-            const translateY = Math.abs(offset) * 6; // 아치형 Y축 오프셋
+            const rotation = offset * 4.0; // 부채꼴 회전 각도
+            const translateY = Math.abs(offset) * 5; // 아치형 Y축 오프셋
 
             // 현재 턴에 사용 가능한 카드인지 판별 (초록색 아웃라인 글로우)
             const isPlayable = def?.type === 'gold' || def?.type === 'unit' || def?.type === 'city';
@@ -42,19 +42,19 @@ export const FanHand: React.FC<FanHandProps> = ({
                 style={{
                   transform: `rotate(${rotation}deg) translateY(${translateY}px)`,
                   transformOrigin: 'bottom center',
-                  marginLeft: idx === 0 ? 0 : '-28px', // 카드 겹침 효과
+                  marginLeft: idx === 0 ? 0 : '-22px', // 카드 겹침 효과
                   zIndex: idx + 10
                 }}
-                className={`transition-all duration-200 cursor-pointer group hover:!z-50 hover:!scale-110 hover:!-translate-y-8`}
+                className={`transition-all duration-200 cursor-pointer group hover:!z-50 hover:!scale-115 hover:!-translate-y-10`}
               >
                 <div
                   className={`relative rounded-lg transition-shadow duration-200 ${
                     isPlayable
-                      ? 'ring-2 ring-emerald-400 shadow-xl shadow-emerald-500/40 rounded-lg'
+                      ? 'ring-2 ring-emerald-400 shadow-xl shadow-emerald-500/50 rounded-lg'
                       : ''
                   }`}
                 >
-                  <CardView cardId={card.definitionId} size="md" />
+                  <CardView cardId={card.definitionId} size="sm" />
 
                   {/* 카드 종류별 액션 인디케이터 태그 */}
                   {def?.type === 'gold' && (

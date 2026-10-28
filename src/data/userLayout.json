@@ -1,0 +1,17 @@
+{
+  "tiltAngle": 18,
+  "elements": {
+    "enemyMat": { "x": 0, "y": 0, "w": 1450, "h": 290, "scale": 1 },
+    "playerMat": { "x": 0, "y": 0, "w": 1450, "h": 560, "scale": 1 },
+    "realm": { "x": 0, "y": 0, "w": 270, "h": 200, "scale": 1 },
+    "battlefield": { "x": 0, "y": 0, "w": 1120, "h": 280, "scale": 1 },
+    "deck": { "x": 0, "y": 0, "w": 170, "h": 250, "scale": 1 },
+    "resources": { "x": 0, "y": 0, "w": 170, "h": 180, "scale": 1 },
+    "support": { "x": 0, "y": 0, "w": 320, "h": 250, "scale": 1 },
+    "barracks": { "x": 0, "y": 0, "w": 720, "h": 250, "scale": 1 },
+    "graveyard": { "x": 0, "y": 0, "w": 170, "h": 250, "scale": 1 },
+    "neutralMarket": { "x": 0, "y": 0, "w": 340, "h": 860, "scale": 1 },
+    "fanHand": { "x": 0, "y": 0, "w": 820, "h": 250, "scale": 1 },
+    "actionButtons": { "x": 0, "y": 0, "w": 250, "h": 80, "scale": 1 }
+  }
+}
