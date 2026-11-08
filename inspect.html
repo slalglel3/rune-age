@@ -185,6 +185,35 @@
       padding: 2px 6px;
       border-radius: 4px;
       box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+      z-index: 5;
+    }
+    .card-thumb.is-excluded {
+      border: 2px dashed #ef4444 !important;
+      background: #1c1114 !important;
+      opacity: 0.45;
+    }
+    .card-thumb.is-excluded:hover {
+      opacity: 0.85;
+      border-color: #f87171 !important;
+    }
+    .card-thumb.is-excluded .thumb-footer {
+      background: #381217 !important;
+      color: #fca5a5 !important;
+      text-decoration: line-through;
+    }
+    .card-thumb.is-excluded::before {
+      content: '🚫 제외됨';
+      position: absolute;
+      top: 6px;
+      left: 6px;
+      background: #ef4444;
+      color: #ffffff;
+      font-size: 0.65rem;
+      font-weight: 800;
+      padding: 2px 6px;
+      border-radius: 4px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+      z-index: 6;
     }
     .thumb-img-wrap {
       position: relative;
@@ -275,6 +304,49 @@
     @keyframes pulse-border {
       0%, 100% { box-shadow: 0 0 6px rgba(245, 158, 11, 0.4); }
       50% { box-shadow: 0 0 14px rgba(245, 158, 11, 0.8); }
+    }
+
+    /* Exclude Unnecessary Images Button & Badge (Item 3!) */
+    .btn-exclude {
+      padding: 4px 10px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      border-radius: 6px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid rgba(239, 68, 68, 0.4);
+      color: #fca5a5;
+      transition: all 0.15s ease;
+    }
+    .btn-exclude:hover {
+      background: rgba(239, 68, 68, 0.3);
+      color: #fff;
+    }
+    .btn-exclude.is-excluded {
+      background: #ef4444;
+      border-color: #dc2626;
+      color: #fff;
+      box-shadow: 0 0 10px rgba(239, 68, 68, 0.6);
+      animation: pulse-border-red 1.5s infinite;
+    }
+    @keyframes pulse-border-red {
+      0%, 100% { box-shadow: 0 0 6px rgba(239, 68, 68, 0.4); }
+      50% { box-shadow: 0 0 14px rgba(239, 68, 68, 0.9); }
+    }
+    .badge-excluded {
+      font-size: 0.72rem;
+      background: rgba(239, 68, 68, 0.25);
+      color: #fca5a5;
+      border: 1px solid rgba(239, 68, 68, 0.6);
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
     }
 
     .save-indicator {
@@ -448,7 +520,7 @@
     }
     .chip-del:hover { color: #ef4444; }
 
-    /* Image Stage with Canvas Overlay */
+    /* Image Stage with Canvas Overlay (125% Default Scale) */
     .image-stage {
       flex: 1;
       position: relative;
@@ -456,18 +528,21 @@
       align-items: center;
       justify-content: center;
       background: #000;
-      overflow: hidden;
-      min-height: 360px;
+      overflow: auto;
+      min-height: 460px;
     }
     .canvas-wrapper {
       position: relative;
       display: inline-block;
       line-height: 0;
+      margin: auto;
+      zoom: 1.25;
+      transition: zoom 0.15s ease;
     }
     .canvas-wrapper img {
       display: block;
-      max-width: 100%;
-      max-height: calc(100vh - 280px);
+      max-width: 125%;
+      max-height: calc((100vh - 220px) * 1.25);
       object-fit: contain;
     }
     .canvas-wrapper canvas {
@@ -610,6 +685,11 @@
       outline: none;
       border-color: var(--primary);
     }
+    .rotation-bar.selected-active {
+      border: 1px solid #f59e0b;
+      box-shadow: 0 0 12px rgba(245, 158, 11, 0.5);
+      background: #1c1917;
+    }
   </style>
 </head>
 <body>
@@ -621,7 +701,7 @@
         <div class="sub">좌측 이미지 1:1 맞춤 4면 절단 점선 & 스페이스바 편집/탐색 모드 전환</div>
       </div>
       <div class="header-actions">
-        <span class="stats-badge" id="stats-badge">선 표시된 카드: 0장 / 310장</span>
+        <span class="stats-badge" id="stats-badge">선 수정: 0장 | 🚫 제외: 0장 / 310장</span>
         <button class="btn btn-success" onclick="exportAnnotations()">📥 주석 JSON 다운로드</button>
         <button class="btn btn-outline" onclick="triggerImport()">📤 불러오기</button>
         <input type="file" id="import-input" style="display:none;" accept=".json" onchange="importAnnotations(event)">
@@ -635,7 +715,9 @@
       <button class="tab-btn" onclick="filterSheet('front_3', this)">앞면 3 (front_3: 60장)</button>
       <button class="tab-btn" onclick="filterSheet('back_1', this)">뒷면 1 (back_1: 60장)</button>
       <button class="tab-btn" onclick="filterSheet('back_2', this)">뒷면 2 (back_2: 60장)</button>
-      <button class="filter-btn" id="filter-marked-btn" onclick="toggleOnlyMarked(this)">📌 선 표시된 카드만 모아보기</button>
+      <button class="filter-btn" id="filter-marked-btn" onclick="toggleOnlyMarked(this)">📌 선 수정됨</button>
+      <button class="filter-btn" id="filter-hide-excluded-btn" onclick="toggleHideExcluded(this)">👁️ 제외 숨기기</button>
+      <button class="filter-btn" id="filter-only-excluded-btn" onclick="toggleOnlyExcluded(this)" style="color:#f87171; border-color:rgba(239,68,68,0.4);">🚫 제외 카드만</button>
     </div>
   </header>
 
@@ -656,6 +738,14 @@
           <span class="kbd" style="background:rgba(0,0,0,0.3); border:none; margin-left:4px;">Space</span>
         </div>
 
+        <!-- Exclude Toggle Button (Item 3!) -->
+        <button type="button" class="btn-exclude" id="btn-exclude-card" onclick="toggleExcludeCard()" title="생성하지 않을 불필요한 이미지로 제외 (단축키: X)">
+          <span id="exclude-icon">🚫</span> <span id="exclude-text">불필요한 이미지 제외</span>
+          <span class="kbd" style="background:rgba(0,0,0,0.3); border:none; margin-left:2px;">X</span>
+        </button>
+
+        <span class="badge-excluded" id="badge-excluded" style="display:none;">🚫 최종 생성 제외됨</span>
+
         <span class="save-indicator" id="save-status">✓ 자동 저장됨</span>
       </div>
       <div class="modal-nav-btns">
@@ -667,13 +757,14 @@
 
     <!-- Precision Line Toolbar -->
     <div class="control-toolbar">
-      <!-- 1, 2, 3, 4 Cut Line Selector (as requested!) -->
-      <span style="font-size:0.75rem; color:#f59e0b; font-weight:700;">절단선 선택:</span>
+      <!-- 1, 2, 3, 4, 5 Cut Line & Rotation Selector (Item 1!) -->
+      <span style="font-size:0.75rem; color:#f59e0b; font-weight:700;">절단선/회전:</span>
       <div class="tool-group">
         <button class="tool-btn edge-sel" id="btn-edge-1" onclick="selectEdgeLine('top')">1 윗선 (Top)</button>
         <button class="tool-btn edge-sel" id="btn-edge-2" onclick="selectEdgeLine('bottom')">2 아래 (Bot)</button>
         <button class="tool-btn edge-sel" id="btn-edge-3" onclick="selectEdgeLine('left')">3 왼쪽 (Left)</button>
         <button class="tool-btn edge-sel" id="btn-edge-4" onclick="selectEdgeLine('right')">4 오른쪽 (Right)</button>
+        <button class="tool-btn edge-sel" id="btn-edge-5" onclick="selectRotationTool()">5 회전 (Rot)</button>
       </div>
 
       <span style="font-size:0.75rem; color:var(--text-muted); font-weight:700; margin-left:6px;">방향:</span>
@@ -694,6 +785,13 @@
         <button class="tool-btn active" id="btn-width-1" onclick="setGlobalLineWidth(1)">1px</button>
         <button class="tool-btn" id="btn-width-2" onclick="setGlobalLineWidth(2)">2px</button>
         <button class="tool-btn" id="btn-style-dashed" onclick="toggleLineStyle()">╌ 점선</button>
+      </div>
+
+      <span style="font-size:0.75rem; color:var(--text-muted); font-weight:700; margin-left:6px;">크기:</span>
+      <div class="tool-group">
+        <button class="tool-btn" id="btn-zoom-100" onclick="setCardZoom(1.0)">100%</button>
+        <button class="tool-btn active" id="btn-zoom-125" onclick="setCardZoom(1.25)">125%</button>
+        <button class="tool-btn" id="btn-zoom-150" onclick="setCardZoom(1.5)">150%</button>
       </div>
 
       <div class="selected-controls" id="selected-controls">
@@ -782,7 +880,7 @@
         <input type="text" class="note-input" id="card-note" placeholder="예: 하단 15px 침범, 상단 10px 잘림" oninput="saveCurrentData()">
       </div>
       <div>
-        <span>단축키: <span class="kbd">Space</span> 모드전환(탐색↔편집) | <span class="kbd">1~4</span> 절단선선택 | <span class="kbd">방향키</span> 1px이동(Shift:5px) | <span class="kbd">[ / ]</span> 우측회전(±0.1°, Shift:±0.5°) | <span class="kbd">0</span> 회전초기화 | <span class="kbd">Del</span> 선삭제</span>
+        <span>단축키: <span class="kbd">Space</span> 모드전환(탐색↔편집) | <span class="kbd">1~4</span> 절단선 | <span class="kbd">5</span> 회전선택 | <span class="kbd">방향키</span> 1px미세조정(Shift:5px) | <span class="kbd">[ / ]</span> 우측회전 | <span class="kbd">0</span> 회전초기화 | <span class="kbd">X</span> 불필요제외 | <span class="kbd">Del</span> 선삭제</span>
       </div>
     </div>
   </div>
@@ -792,6 +890,10 @@
 
     let currentSheet = 'front_1';
     let onlyMarked = false;
+    let hideExcluded = false;
+    let onlyExcluded = false;
+    let currentExcluded = false;
+    let currentCardZoom = parseFloat(localStorage.getItem('rune_age_card_zoom') || '1.25');
     let currentIndex = 0;
     let activeCardIndices = [];
 
@@ -874,15 +976,80 @@
       }
     }
 
+    // Zoom Selector: 100%, 125% (default), 150% (Item 2!)
+    function setCardZoom(level) {
+      currentCardZoom = level;
+      localStorage.setItem('rune_age_card_zoom', level);
+      document.querySelectorAll('[id^=btn-zoom-]').forEach(b => b.classList.remove('active'));
+      const btn = document.getElementById('btn-zoom-' + Math.round(level * 100));
+      if (btn) btn.classList.add('active');
+
+      document.querySelectorAll('.canvas-wrapper').forEach(w => {
+        w.style.zoom = level;
+      });
+    }
+
+    // Select Rotation Tool (Key 5, Item 1!)
+    function selectRotationTool() {
+      selectedLineRef = { side: 'right', type: 'rotation' };
+      document.querySelectorAll('.tool-btn.edge-sel').forEach(b => b.classList.remove('active'));
+      const btn5 = document.getElementById('btn-edge-5');
+      if (btn5) btn5.classList.add('active');
+
+      const rotBar = document.getElementById('rotation-bar');
+      if (rotBar) rotBar.classList.add('selected-active');
+
+      updateSelectedUI();
+      drawCanvas('left');
+      drawCanvas('right');
+      renderChips('left');
+      renderChips('right');
+    }
+
+    // Exclude Unnecessary Images Toggle (Item 3!)
+    function toggleExcludeCard() {
+      currentExcluded = !currentExcluded;
+      updateExcludeUI();
+      saveCurrentData();
+    }
+
+    function updateExcludeUI() {
+      const btn = document.getElementById('btn-exclude-card');
+      const icon = document.getElementById('exclude-icon');
+      const text = document.getElementById('exclude-text');
+      const badge = document.getElementById('badge-excluded');
+
+      if (!btn) return;
+      if (currentExcluded) {
+        btn.classList.add('is-excluded');
+        if (icon) icon.innerText = '🚫';
+        if (text) text.innerText = '제외된 카드 (생성 안 함)';
+        if (badge) badge.style.display = 'inline-flex';
+      } else {
+        btn.classList.remove('is-excluded');
+        if (icon) icon.innerText = '🚫';
+        if (text) text.innerText = '불필요한 이미지 제외';
+        if (badge) badge.style.display = 'none';
+      }
+    }
+
     function updateStats() {
-      const markedCount = Object.keys(annotations).filter(id => {
-        const a = annotations[id];
-        return (a.left_lines && a.left_lines.length > 0) || 
-               (a.right_lines && a.right_lines.length > 0) || 
-               (a.note && a.note.trim().length > 0) ||
-               (a.rotation && Math.abs(a.rotation) > 0.001);
-      }).length;
-      document.getElementById('stats-badge').innerText = `선 표시된 카드: ${markedCount}장 / ${cards.length}장`;
+      let markedCount = 0;
+      let excludedCount = 0;
+
+      cards.forEach(c => {
+        const a = annotations[c.id];
+        if (!a) return;
+        if (a.excluded) excludedCount++;
+        if ((a.left_lines && a.left_lines.length > 0) || 
+            (a.right_lines && a.right_lines.length > 0) || 
+            (a.note && a.note.trim().length > 0) ||
+            (a.rotation && Math.abs(a.rotation) > 0.001)) {
+          markedCount++;
+        }
+      });
+
+      document.getElementById('stats-badge').innerHTML = `선 수정: <b>${markedCount}</b>장 | 🚫 제외: <b style="color:#f87171;">${excludedCount}</b>장 / 전체 ${cards.length}장`;
     }
 
     function filterSheet(sheetName, btn) {
@@ -898,6 +1065,28 @@
       renderGrid();
     }
 
+    function toggleHideExcluded(btn) {
+      hideExcluded = !hideExcluded;
+      if (hideExcluded) {
+        onlyExcluded = false;
+        const onlyBtn = document.getElementById('filter-only-excluded-btn');
+        if (onlyBtn) onlyBtn.classList.remove('active');
+      }
+      btn.classList.toggle('active', hideExcluded);
+      renderGrid();
+    }
+
+    function toggleOnlyExcluded(btn) {
+      onlyExcluded = !onlyExcluded;
+      if (onlyExcluded) {
+        hideExcluded = false;
+        const hideBtn = document.getElementById('filter-hide-excluded-btn');
+        if (hideBtn) hideBtn.classList.remove('active');
+      }
+      btn.classList.toggle('active', onlyExcluded);
+      renderGrid();
+    }
+
     function renderGrid() {
       const grid = document.getElementById('card-grid');
       grid.innerHTML = '';
@@ -907,6 +1096,7 @@
         if (c.sheet !== currentSheet) return;
         
         const a = annotations[c.id];
+        const isExcluded = !!(a && a.excluded);
         const isRotated = a && a.rotation && Math.abs(a.rotation) > 0.001;
         const isMarked = a && (
           (a.left_lines && a.left_lines.length > 0) || 
@@ -915,21 +1105,27 @@
           isRotated
         );
 
+        if (hideExcluded && isExcluded) return;
+        if (onlyExcluded && !isExcluded) return;
         if (onlyMarked && !isMarked) return;
 
         activeCardIndices.push(idx);
 
         const cardEl = document.createElement('div');
-        cardEl.className = 'card-thumb' + (isMarked ? ' is-marked' : '');
+        let thumbClasses = 'card-thumb';
+        if (isMarked) thumbClasses += ' is-marked';
+        if (isExcluded) thumbClasses += ' is-excluded';
+        cardEl.className = thumbClasses;
         cardEl.id = 'thumb-' + c.id;
         cardEl.onclick = () => openModal(idx);
 
         const rotBadge = isRotated ? ` <span style="color:#fbbf24; font-weight:bold;">(↺ ${a.rotation > 0 ? '+' : ''}${a.rotation}°)</span>` : '';
+        const exBadge = isExcluded ? ` <span style="color:#f87171; font-weight:bold;">[제외]</span>` : '';
         cardEl.innerHTML = `
           <div class="thumb-img-wrap">
             <img src="${c.crop_src}" alt="${c.id}" loading="lazy">
           </div>
-          <div class="thumb-footer">${c.id}${rotBadge}</div>
+          <div class="thumb-footer">${c.id}${rotBadge}${exBadge}</div>
         `;
         grid.appendChild(cardEl);
       });
@@ -1015,6 +1211,8 @@
         const btnMap = { top: 'btn-edge-1', bottom: 'btn-edge-2', left: 'btn-edge-3', right: 'btn-edge-4' };
         const activeBtn = document.getElementById(btnMap[edgeName]);
         if (activeBtn) activeBtn.classList.add('active');
+        const rotBar = document.getElementById('rotation-bar');
+        if (rotBar) rotBar.classList.remove('selected-active');
       }
     }
 
@@ -1034,9 +1232,12 @@
       // Load saved annotations or auto-populate 4-edge cut lines from Left Image crop (Requirement 1 & 2!)
       const a = annotations[c.id];
       currentRotation = (a && a.rotation !== undefined) ? Number(a.rotation) : 0;
+      currentExcluded = !!(a && a.excluded);
       applyRotationToImg();
+      updateExcludeUI();
+      setCardZoom(currentCardZoom);
 
-      if (a && (a.left_lines || a.right_lines || a.note || a.rotation !== undefined)) {
+      if (a && (a.left_lines || a.right_lines || a.note || a.rotation !== undefined || a.excluded !== undefined)) {
         currentLeftLines = JSON.parse(JSON.stringify(a.left_lines || []));
         currentRightLines = JSON.parse(JSON.stringify(a.right_lines || []));
         document.getElementById('card-note').value = a.note || '';
@@ -1271,6 +1472,12 @@
 
     function selectLine(side, index) {
       selectedLineRef = { side, index };
+      document.querySelectorAll('.tool-btn.edge-sel').forEach(b => b.classList.remove('active'));
+      const rotBar = document.getElementById('rotation-bar');
+      if (rotBar) rotBar.classList.remove('selected-active');
+      const btn5 = document.getElementById('btn-edge-5');
+      if (btn5) btn5.classList.remove('active');
+
       updateSelectedUI();
       drawCanvas('left');
       drawCanvas('right');
@@ -1282,6 +1489,11 @@
       const label = document.getElementById('selected-label');
       if (!selectedLineRef) {
         label.innerText = '선택: 없음';
+        return;
+      }
+      if (selectedLineRef.type === 'rotation') {
+        const formatted = (currentRotation > 0 ? '+' : '') + currentRotation.toFixed(2) + '°';
+        label.innerHTML = `<span style="color:#fbbf24; font-weight:bold;">[5 우측회전] ${formatted}</span>`;
         return;
       }
       const lines = selectedLineRef.side === 'left' ? currentLeftLines : currentRightLines;
@@ -1309,9 +1521,12 @@
     }
 
     function deleteSelectedLine() {
-      if (selectedLineRef) {
-        deleteLineAt(selectedLineRef.side, selectedLineRef.index);
+      if (!selectedLineRef) return;
+      if (selectedLineRef.type === 'rotation') {
+        setRotation(0);
+        return;
       }
+      deleteLineAt(selectedLineRef.side, selectedLineRef.index);
     }
 
     function nudgeSelected(delta) {
@@ -1322,6 +1537,12 @@
         }
       }
       if (!selectedLineRef) return;
+
+      if (selectedLineRef.type === 'rotation') {
+        const rotDelta = Math.abs(delta) >= 5 ? (delta > 0 ? 0.5 : -0.5) : (delta > 0 ? 0.1 : -0.1);
+        adjustRotation(rotDelta);
+        return;
+      }
 
       const lines = selectedLineRef.side === 'left' ? currentLeftLines : currentRightLines;
       const line = lines[selectedLineRef.index];
@@ -1432,15 +1653,18 @@
       const note = document.getElementById('card-note').value;
       
       const isRotated = Math.abs(currentRotation) > 0.001;
+      const isExcluded = !!currentExcluded;
       const hasContent = currentLeftLines.length > 0 || 
                          currentRightLines.length > 0 || 
                          (note && note.trim().length > 0) ||
-                         isRotated;
+                         isRotated ||
+                         isExcluded;
 
       if (hasContent) {
         annotations[c.id] = {
           sheet: c.sheet,
           filename: c.filename,
+          excluded: isExcluded,
           rotation: currentRotation,
           left_lines: currentLeftLines,
           right_lines: currentRightLines,
@@ -1492,7 +1716,7 @@
         return;
       }
 
-      // Shortcuts 1, 2, 3, 4: Select Edge Line (Requirement 3!)
+      // Shortcuts 1, 2, 3, 4: Select Edge Line | 5: Select Rotation (Item 1!)
       if (e.key === '1') {
         selectEdgeLine('top');
         return;
@@ -1504,6 +1728,16 @@
         return;
       } else if (e.key === '4') {
         selectEdgeLine('right');
+        return;
+      } else if (e.key === '5') {
+        selectRotationTool();
+        return;
+      }
+
+      // Shortcut X: Toggle Exclude / Include (Item 3!)
+      if (e.key.toLowerCase() === 'x') {
+        e.preventDefault();
+        toggleExcludeCard();
         return;
       }
 
