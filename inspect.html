@@ -1004,6 +1004,11 @@
       drawCanvas('right');
       renderChips('left');
       renderChips('right');
+
+      // Automatically switch to Edit Mode (User requested: 1~5 누르면 자동으로 편집모드 전환)
+      if (!isEditMode) {
+        toggleEditMode(true);
+      }
     }
 
     // Exclude Unnecessary Images Toggle (Item 3!)
@@ -1213,6 +1218,11 @@
         if (activeBtn) activeBtn.classList.add('active');
         const rotBar = document.getElementById('rotation-bar');
         if (rotBar) rotBar.classList.remove('selected-active');
+      }
+
+      // Automatically switch to Edit Mode (User requested: 1~5 누르면 자동으로 편집모드 전환)
+      if (!isEditMode) {
+        toggleEditMode(true);
       }
     }
 
@@ -1483,6 +1493,11 @@
       drawCanvas('right');
       renderChips('left');
       renderChips('right');
+
+      // Automatically switch to Edit Mode when any line is selected
+      if (!isEditMode) {
+        toggleEditMode(true);
+      }
     }
 
     function updateSelectedUI() {
