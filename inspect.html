@@ -532,6 +532,84 @@
       pointer-events: none;
       z-index: 10;
     }
+
+    /* Right Image Rotation Toolbar */
+    .rotation-bar {
+      background: #0d1527;
+      border-bottom: 1px solid var(--border-color);
+      padding: 5px 10px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.72rem;
+    }
+    .rot-label-group {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .rot-value {
+      font-family: monospace;
+      font-weight: 700;
+      color: #94a3b8;
+      min-width: 48px;
+      display: inline-block;
+    }
+    .rot-btn-group {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+    }
+    .btn-rot {
+      padding: 3px 6px;
+      font-size: 0.7rem;
+      background: #1e293b;
+      border: 1px solid var(--border-color);
+      color: #e2e8f0;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.1s;
+    }
+    .btn-rot:hover {
+      background: #334155;
+      color: #fff;
+    }
+    .btn-rot-reset {
+      color: #f59e0b;
+      border-color: rgba(245, 158, 11, 0.4);
+    }
+    .btn-rot-reset:hover {
+      background: rgba(245, 158, 11, 0.2);
+    }
+    .rot-slider-wrap {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-left: auto;
+    }
+    .rot-slider-wrap input[type=range] {
+      width: 105px;
+      height: 4px;
+      cursor: pointer;
+      accent-color: #3b82f6;
+    }
+    #rot-number-input {
+      width: 54px;
+      background: #1e293b;
+      border: 1px solid var(--border-color);
+      color: #38bdf8;
+      border-radius: 4px;
+      padding: 2px 4px;
+      font-size: 0.7rem;
+      font-family: monospace;
+      text-align: center;
+    }
+    #rot-number-input:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
   </style>
 </head>
 <body>
@@ -663,6 +741,27 @@
             <button class="btn-mini" style="padding:2px 6px; font-size:0.7rem; background:#1f2937; color:#f87171; border:1px solid #374151; border-radius:3px; cursor:pointer;" onclick="clearLines('right')">비우기</button>
           </div>
         </div>
+
+        <!-- Rotation Toolbar for Right Comparison Image -->
+        <div class="rotation-bar" id="rotation-bar">
+          <div class="rot-label-group">
+            <span style="font-size:0.85rem;">🔄</span>
+            <span style="font-weight:700; color:var(--text-muted);">회전(기울기):</span>
+            <span class="rot-value" id="rot-value-text">0.00°</span>
+          </div>
+          <div class="rot-btn-group">
+            <button type="button" class="btn-rot" onclick="adjustRotation(-0.5)" title="반시계 0.5도">↺ -0.5°</button>
+            <button type="button" class="btn-rot" onclick="adjustRotation(-0.1)" title="반시계 0.1도 ([키)">↺ -0.1°</button>
+            <button type="button" class="btn-rot btn-rot-reset" onclick="setRotation(0)" title="회전 0도 초기화 (0키)">0° 초기화</button>
+            <button type="button" class="btn-rot" onclick="adjustRotation(0.1)" title="시계 0.1도 (]키)">↻ +0.1°</button>
+            <button type="button" class="btn-rot" onclick="adjustRotation(0.5)" title="시계 0.5도">↻ +0.5°</button>
+          </div>
+          <div class="rot-slider-wrap">
+            <input type="range" id="rot-slider" min="-5.0" max="5.0" step="0.05" value="0" oninput="onRotationSliderInput(this.value)" title="미세 각도 조절 슬라이더 (-5.0° ~ +5.0°)">
+            <input type="number" id="rot-number-input" min="-45" max="45" step="0.05" value="0" onchange="setRotation(parseFloat(this.value))" title="각도 직접 입력 (-45° ~ +45°)">
+          </div>
+        </div>
+
         <div class="line-chips-bar" id="right-chips">
           <span style="color:var(--text-muted); font-size:0.7rem;">표시된 선 없음</span>
         </div>
@@ -683,7 +782,7 @@
         <input type="text" class="note-input" id="card-note" placeholder="예: 하단 15px 침범, 상단 10px 잘림" oninput="saveCurrentData()">
       </div>
       <div>
-        <span>단축키: <span class="kbd">Space</span> 모드전환(탐색↔편집) | <span class="kbd">1~4</span> 상/하/좌/우선 선택 | <span class="kbd">방향키</span> 1px 미세조정(Shift:5px) | <span class="kbd">Del</span> 선삭제</span>
+        <span>단축키: <span class="kbd">Space</span> 모드전환(탐색↔편집) | <span class="kbd">1~4</span> 절단선선택 | <span class="kbd">방향키</span> 1px이동(Shift:5px) | <span class="kbd">[ / ]</span> 우측회전(±0.1°, Shift:±0.5°) | <span class="kbd">0</span> 회전초기화 | <span class="kbd">Del</span> 선삭제</span>
       </div>
     </div>
   </div>
@@ -731,12 +830,57 @@
     // Dragging state
     let dragging = null;
 
+    // Right Image Rotation state (degrees, e.g. -0.4, 0.5)
+    let currentRotation = 0;
+
+    function setRotation(deg) {
+      if (isNaN(deg)) deg = 0;
+      currentRotation = Math.round(deg * 100) / 100;
+      applyRotationToImg();
+      saveCurrentData();
+    }
+
+    function adjustRotation(delta) {
+      setRotation(currentRotation + delta);
+    }
+
+    function onRotationSliderInput(val) {
+      const deg = parseFloat(val);
+      currentRotation = isNaN(deg) ? 0 : Math.round(deg * 100) / 100;
+      applyRotationToImg();
+      saveCurrentData();
+    }
+
+    function applyRotationToImg() {
+      const img = document.getElementById('context-img');
+      const text = document.getElementById('rot-value-text');
+      const slider = document.getElementById('rot-slider');
+      const numInput = document.getElementById('rot-number-input');
+
+      const isRotated = Math.abs(currentRotation) > 0.001;
+      const formatted = (currentRotation > 0 ? '+' : '') + currentRotation.toFixed(2) + '°';
+
+      if (text) {
+        text.innerText = formatted;
+        text.style.color = isRotated ? '#fbbf24' : '#94a3b8';
+      }
+      if (slider) slider.value = currentRotation;
+      if (numInput) numInput.value = currentRotation.toFixed(2);
+
+      if (img) {
+        img.style.transform = isRotated ? `rotate(${currentRotation}deg)` : '';
+        img.style.transformOrigin = 'center center';
+        img.style.transition = 'transform 0.05s ease-out';
+      }
+    }
+
     function updateStats() {
       const markedCount = Object.keys(annotations).filter(id => {
         const a = annotations[id];
         return (a.left_lines && a.left_lines.length > 0) || 
                (a.right_lines && a.right_lines.length > 0) || 
-               (a.note && a.note.trim().length > 0);
+               (a.note && a.note.trim().length > 0) ||
+               (a.rotation && Math.abs(a.rotation) > 0.001);
       }).length;
       document.getElementById('stats-badge').innerText = `선 표시된 카드: ${markedCount}장 / ${cards.length}장`;
     }
@@ -763,10 +907,12 @@
         if (c.sheet !== currentSheet) return;
         
         const a = annotations[c.id];
+        const isRotated = a && a.rotation && Math.abs(a.rotation) > 0.001;
         const isMarked = a && (
           (a.left_lines && a.left_lines.length > 0) || 
           (a.right_lines && a.right_lines.length > 0) || 
-          (a.note && a.note.trim().length > 0)
+          (a.note && a.note.trim().length > 0) ||
+          isRotated
         );
 
         if (onlyMarked && !isMarked) return;
@@ -778,11 +924,12 @@
         cardEl.id = 'thumb-' + c.id;
         cardEl.onclick = () => openModal(idx);
 
+        const rotBadge = isRotated ? ` <span style="color:#fbbf24; font-weight:bold;">(↺ ${a.rotation > 0 ? '+' : ''}${a.rotation}°)</span>` : '';
         cardEl.innerHTML = `
           <div class="thumb-img-wrap">
             <img src="${c.crop_src}" alt="${c.id}" loading="lazy">
           </div>
-          <div class="thumb-footer">${c.id}</div>
+          <div class="thumb-footer">${c.id}${rotBadge}</div>
         `;
         grid.appendChild(cardEl);
       });
@@ -886,7 +1033,10 @@
 
       // Load saved annotations or auto-populate 4-edge cut lines from Left Image crop (Requirement 1 & 2!)
       const a = annotations[c.id];
-      if (a && (a.left_lines || a.right_lines || a.note)) {
+      currentRotation = (a && a.rotation !== undefined) ? Number(a.rotation) : 0;
+      applyRotationToImg();
+
+      if (a && (a.left_lines || a.right_lines || a.note || a.rotation !== undefined)) {
         currentLeftLines = JSON.parse(JSON.stringify(a.left_lines || []));
         currentRightLines = JSON.parse(JSON.stringify(a.right_lines || []));
         document.getElementById('card-note').value = a.note || '';
@@ -1281,11 +1431,17 @@
       if (!c) return;
       const note = document.getElementById('card-note').value;
       
-      const hasContent = currentLeftLines.length > 0 || currentRightLines.length > 0 || (note && note.trim().length > 0);
+      const isRotated = Math.abs(currentRotation) > 0.001;
+      const hasContent = currentLeftLines.length > 0 || 
+                         currentRightLines.length > 0 || 
+                         (note && note.trim().length > 0) ||
+                         isRotated;
+
       if (hasContent) {
         annotations[c.id] = {
           sheet: c.sheet,
           filename: c.filename,
+          rotation: currentRotation,
           left_lines: currentLeftLines,
           right_lines: currentRightLines,
           note: note
@@ -1299,7 +1455,7 @@
       updateStats();
     }
 
-    // Keyboard Shortcuts (Item 3 & 4: Spacebar for mode switch, 1~4 for line select, Arrows for adjustment!)
+    // Keyboard Shortcuts (Item 3 & 4: Spacebar for mode switch, 1~4 for line select, Arrows for adjustment, [ / ] for rotation!)
     window.addEventListener('keydown', (e) => {
       const modal = document.getElementById('modal');
       const isModalOpen = modal.classList.contains('active');
@@ -1318,6 +1474,21 @@
       if (e.code === 'Space') {
         e.preventDefault();
         toggleEditMode();
+        return;
+      }
+
+      // Rotation shortcuts: [ (counter-clockwise) and ] (clockwise), 0 (reset)
+      if (e.key === '[') {
+        e.preventDefault();
+        adjustRotation(e.shiftKey ? -0.5 : -0.1);
+        return;
+      } else if (e.key === ']') {
+        e.preventDefault();
+        adjustRotation(e.shiftKey ? 0.5 : 0.1);
+        return;
+      } else if (e.key === '0') {
+        e.preventDefault();
+        setRotation(0);
         return;
       }
 
