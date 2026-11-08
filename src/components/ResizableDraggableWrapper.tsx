@@ -10,6 +10,7 @@ interface Props {
   onChange: (newLayout: ElementLayout) => void;
   children: React.ReactNode;
   className?: string;
+  defaultZIndex?: number;
 }
 
 export const ResizableDraggableWrapper: React.FC<Props> = ({
@@ -19,12 +20,21 @@ export const ResizableDraggableWrapper: React.FC<Props> = ({
   isEditMode,
   onChange,
   children,
-  className = ''
+  className = '',
+  defaultZIndex = 10
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isDragging, setIsDragging] = useState(false);
-  const [isResizing, setIsResizing] = useState(false);
-  const startPos = useRef<{ x: number; y: number; startX: number; startY: number; startW: number; startH: number }>({
+  const [resizeMode, setResizeMode] = useState<'both' | 'width' | 'height' | null>(null);
+
+  const startPos = useRef<{
+    x: number;
+    y: number;
+    startX: number;
+    startY: number;
+    startW: number;
+    startH: number;
+  }>({
     x: 0,
     y: 0,
     startX: 0,
@@ -42,26 +52,26 @@ export const ResizableDraggableWrapper: React.FC<Props> = ({
     startPos.current = {
       x: e.clientX,
       y: e.clientY,
-      startX: layout.x || 0,
-      startY: layout.y || 0,
-      startW: layout.w || containerRef.current?.offsetWidth || 120,
-      startH: layout.h || containerRef.current?.offsetHeight || 80
+      startX: layout.x ?? 0,
+      startY: layout.y ?? 0,
+      startW: layout.w ?? containerRef.current?.offsetWidth ?? 120,
+      startH: layout.h ?? containerRef.current?.offsetHeight ?? 80
     };
   };
 
-  // 리사이즈 시작 (가로/세로 제한 없는 크기 조절)
-  const handleResizeStart = (e: React.MouseEvent) => {
+  // 리사이즈 시작 (모드: both, width, height)
+  const handleResizeStart = (e: React.MouseEvent, mode: 'both' | 'width' | 'height') => {
     if (!isEditMode) return;
     e.preventDefault();
     e.stopPropagation();
-    setIsResizing(true);
+    setResizeMode(mode);
     startPos.current = {
       x: e.clientX,
       y: e.clientY,
-      startX: layout.x || 0,
-      startY: layout.y || 0,
-      startW: layout.w || containerRef.current?.offsetWidth || 120,
-      startH: layout.h || containerRef.current?.offsetHeight || 80
+      startX: layout.x ?? 0,
+      startY: layout.y ?? 0,
+      startW: layout.w ?? containerRef.current?.offsetWidth ?? 120,
+      startH: layout.h ?? containerRef.current?.offsetHeight ?? 80
     };
   };
 
@@ -75,24 +85,32 @@ export const ResizableDraggableWrapper: React.FC<Props> = ({
           x: Math.round(startPos.current.startX + dx),
           y: Math.round(startPos.current.startY + dy)
         });
-      } else if (isResizing) {
+      } else if (resizeMode) {
         const dx = e.clientX - startPos.current.x;
         const dy = e.clientY - startPos.current.y;
-        // 가로·세로 최소 30px 외에는 상한선 없이 무제한 자유 조절!
+
+        const newW = (resizeMode === 'both' || resizeMode === 'width')
+          ? Math.max(30, Math.round(startPos.current.startW + dx))
+          : layout.w;
+
+        const newH = (resizeMode === 'both' || resizeMode === 'height')
+          ? Math.max(30, Math.round(startPos.current.startH + dy))
+          : layout.h;
+
         onChange({
           ...layout,
-          w: Math.max(30, Math.round(startPos.current.startW + dx)),
-          h: Math.max(30, Math.round(startPos.current.startH + dy))
+          w: newW,
+          h: newH
         });
       }
     };
 
     const handleMouseUp = () => {
       setIsDragging(false);
-      setIsResizing(false);
+      setResizeMode(null);
     };
 
-    if (isDragging || isResizing) {
+    if (isDragging || resizeMode) {
       window.addEventListener('mousemove', handleMouseMove);
       window.addEventListener('mouseup', handleMouseUp);
     }
@@ -101,18 +119,22 @@ export const ResizableDraggableWrapper: React.FC<Props> = ({
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('mouseup', handleMouseUp);
     };
-  }, [isDragging, isResizing, layout, onChange]);
+  }, [isDragging, resizeMode, layout, onChange]);
 
-  // 가로/세로가 지정되어 있을 경우 부모 Flexbox에 의해 찌그러지거나 강제 제한되지 않도록 flex: 'none' 강제 적용
+  // 100% 완전 독립 절대 좌표 (Absolute Positioning)
+  // 다른 어떤 요소와도 flex/flow 간섭이 일어나지 않으며, 개별 좌표와 크기로만 렌더링됨!
+  const zIndex = isDragging || resizeMode
+    ? 999
+    : (id === 'playerMat' || id === 'enemyMat' ? 1 : defaultZIndex);
+
   const style: React.CSSProperties = {
-    transform: `translate(${layout.x || 0}px, ${layout.y || 0}px)`,
+    position: 'absolute',
+    left: `${layout.x ?? 0}px`,
+    top: `${layout.y ?? 0}px`,
     width: layout.w ? `${layout.w}px` : undefined,
     height: layout.h ? `${layout.h}px` : undefined,
-    flex: layout.w ? 'none' : undefined,
-    flexGrow: layout.w ? 0 : undefined,
-    flexShrink: 0,
-    minWidth: 0,
-    maxWidth: 'none',
+    zIndex,
+    userSelect: isDragging || resizeMode ? 'none' : undefined,
   };
 
   if (!isEditMode) {
@@ -127,8 +149,8 @@ export const ResizableDraggableWrapper: React.FC<Props> = ({
     <div
       ref={containerRef}
       style={style}
-      className={`relative group border-2 border-dashed border-cyan-400 bg-cyan-950/20 rounded-2xl transition-shadow ${
-        isDragging ? 'shadow-2xl ring-4 ring-cyan-300 z-50' : 'hover:border-cyan-300'
+      className={`relative group border-2 border-dashed border-cyan-400 bg-cyan-950/25 rounded-2xl transition-shadow ${
+        isDragging ? 'shadow-2xl ring-4 ring-cyan-300' : 'hover:border-cyan-300'
       } ${className}`}
     >
       {/* 상단 드래그 핸들 바 */}
@@ -140,7 +162,7 @@ export const ResizableDraggableWrapper: React.FC<Props> = ({
           <Move size={12} /> {label}
         </span>
         <span className="text-[10px] text-cyan-200">
-          ({layout.x || 0}, {layout.y || 0}) {layout.w && layout.h ? `[${layout.w}×${layout.h}]` : ''}
+          ({layout.x ?? 0}, {layout.y ?? 0}) {layout.w && layout.h ? `[${layout.w}×${layout.h}]` : ''}
         </span>
       </div>
 
@@ -148,11 +170,25 @@ export const ResizableDraggableWrapper: React.FC<Props> = ({
         {children}
       </div>
 
-      {/* 우측 하단 리사이즈 핸들 (대형 눈에 띄는 버튼) */}
+      {/* 1. 우측 가장자리 핸들 (가로 너비만 조절) */}
       <div
-        onMouseDown={handleResizeStart}
-        className="absolute -bottom-3 -right-3 w-8 h-8 bg-amber-500 hover:bg-amber-400 text-slate-950 rounded-full flex items-center justify-center cursor-nwse-resize shadow-xl z-30 transition transform hover:scale-125"
-        title="가로/세로 자유 크기 조절 (드래그)"
+        onMouseDown={(e) => handleResizeStart(e, 'width')}
+        className="absolute top-2 bottom-2 -right-1.5 w-3 cursor-ew-resize hover:bg-amber-400/80 rounded-full z-30 transition"
+        title="가로 너비만 조절 (좌우 드래그)"
+      />
+
+      {/* 2. 하단 가장자리 핸들 (세로 높이만 조절) */}
+      <div
+        onMouseDown={(e) => handleResizeStart(e, 'height')}
+        className="absolute left-2 right-2 -bottom-1.5 h-3 cursor-ns-resize hover:bg-amber-400/80 rounded-full z-30 transition"
+        title="세로 높이만 조절 (상하 드래그)"
+      />
+
+      {/* 3. 우측 하단 모서리 핸들 (가로 + 세로 동시 조절) */}
+      <div
+        onMouseDown={(e) => handleResizeStart(e, 'both')}
+        className="absolute -bottom-3 -right-3 w-8 h-8 bg-amber-500 hover:bg-amber-400 text-slate-950 rounded-full flex items-center justify-center cursor-nwse-resize shadow-xl z-40 transition transform hover:scale-125"
+        title="가로/세로 동시 크기 조절 (드래그)"
       >
         <Maximize2 size={15} className="rotate-90" />
       </div>

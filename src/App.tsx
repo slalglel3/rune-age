@@ -11,14 +11,11 @@ import {
   fetchServerLayout,
   DEFAULT_LAYOUT
 } from './types/layout';
-import { FACTION_INFO, FACTION_UNITS, ALL_CARDS } from './engine/cardDatabase';
+import { FACTION_INFO, FACTION_UNITS } from './engine/cardDatabase';
 import { PlaymatField } from './components/PlaymatField';
-import { FanHand } from './components/FanHand';
-import { DynamicActionButtons } from './components/DynamicActionButtons';
 import { CardZoomPreview } from './components/CardZoomPreview';
 import { GameLogModal } from './components/GameLogModal';
 import { LayoutEditorToolbar } from './components/LayoutEditorToolbar';
-import { ResizableDraggableWrapper } from './components/ResizableDraggableWrapper';
 import { CardView } from './components/CardView';
 import { Trophy, Skull, RotateCcw, Sparkles, ScrollText, Sliders } from 'lucide-react';
 
@@ -34,7 +31,7 @@ export function App() {
   const [isLogOpen, setIsLogOpen] = useState(false);
   const [hoveredCardId, setHoveredCardId] = useState<string | null>(null);
 
-  // 마운트 시: 서버에 저장된 userLayout.json이 있으면 불러오고, 없으면 브라우저 상태를 서버에 자동 백업
+  // 마운트 시: 서버에 저장된 userLayout.json이 있으면 불러오고, 없으면 브라우저 상태를 서버에 자동 동기화
   useEffect(() => {
     fetchServerLayout().then((serverLayout) => {
       if (serverLayout) {
@@ -200,9 +197,9 @@ export function App() {
       </header>
 
       {/* ========================================================
-          2. 중앙 메인: 3D 원근 틸트 테이블탑 전장 (Perspective Field)
+          2. 메인: 100% 개별 조작 가능한 2D/3D 통합 무대 (Absolute Stage)
           ======================================================== */}
-      <main className="flex-1 flex flex-col min-h-0 overflow-hidden relative">
+      <main className="flex-1 min-h-0 overflow-hidden relative">
         <PlaymatField
           state={state}
           layoutConfig={layoutConfig}
@@ -215,53 +212,18 @@ export function App() {
           onCardHover={(cardId) => setHoveredCardId(cardId)}
           onBuyUnit={(unitId) => dispatch({ type: 'BUY_BARRACKS_UNIT', unitId })}
           onBuyMarketCard={(cardId) => dispatch({ type: 'BUY_MARKET_CARD', cardId })}
+          onPlayHandCard={(instanceId) => dispatch({ type: 'PLAY_HAND_CARD', instanceId })}
+          onEndTurn={() => dispatch({ type: 'END_TURN' })}
         />
       </main>
 
       {/* ========================================================
-          3. 최하단: HUD 전면 레이어 (부채꼴 손패 & 단일 턴 종료 버튼)
-          ======================================================== */}
-      <footer className="bg-gradient-to-t from-slate-950 via-slate-950/95 to-transparent pt-1 pb-3 px-4 flex items-end justify-between shrink-0 relative z-40">
-        <div className="w-24 sm:w-48 shrink-0 pointer-events-none" />
-
-        {/* 중앙: 부채꼴 손패 (드래그/리사이즈 지원) */}
-        <div className="flex-1 flex justify-center overflow-visible">
-          <ResizableDraggableWrapper
-            id="fanHand"
-            label="부채꼴 손패"
-            layout={layoutConfig.elements.fanHand}
-            isEditMode={isEditMode}
-            onChange={(nl) => handleUpdateElementLayout('fanHand', nl)}
-          >
-            <FanHand
-              hand={state.hand}
-              onPlayCard={(instanceId) => dispatch({ type: 'PLAY_HAND_CARD', instanceId })}
-              onHoverCard={(cardId) => setHoveredCardId(cardId)}
-            />
-          </ResizableDraggableWrapper>
-        </div>
-
-        {/* 우측: 턴 종료 단일 액션 버튼 (드래그/리사이즈 지원) */}
-        <ResizableDraggableWrapper
-          id="actionButtons"
-          label="턴 종료 버튼"
-          layout={layoutConfig.elements.actionButtons}
-          isEditMode={isEditMode}
-          onChange={(nl) => handleUpdateElementLayout('actionButtons', nl)}
-        >
-          <DynamicActionButtons
-            onEndTurn={() => dispatch({ type: 'END_TURN' })}
-          />
-        </ResizableDraggableWrapper>
-      </footer>
-
-      {/* ========================================================
-          4. 카드 줌 프리뷰 (호버 시 좌측 하단 대형 팝업)
+          3. 카드 줌 프리뷰 (호버 시 좌측 하단 대형 팝업)
           ======================================================== */}
       <CardZoomPreview cardId={hoveredCardId} />
 
       {/* ========================================================
-          5. 실시간 게임 로그 모달
+          4. 실시간 게임 로그 모달
           ======================================================== */}
       <GameLogModal
         logs={state.logs}
@@ -270,7 +232,7 @@ export function App() {
       />
 
       {/* ========================================================
-          6. 승리 / 패배 결과 화면
+          5. 승리 / 패배 결과 화면
           ======================================================== */}
       {(state.phase === 'VICTORY' || state.phase === 'DEFEAT') && (
         <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
